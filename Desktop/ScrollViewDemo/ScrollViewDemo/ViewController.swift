@@ -70,6 +70,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
         self.addChildViewController(vc5)
         viewMenuBottom.bringSubview(toFront: views[0])
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
 
