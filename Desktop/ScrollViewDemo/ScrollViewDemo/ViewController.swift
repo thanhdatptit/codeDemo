@@ -17,6 +17,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     let numberWidth = 52
     let spaceSwidth = 10
     let numberheigh = 52
+    var isCanUpdateNumberOffset:Bool = false
+    
 
     @IBOutlet weak var lblTest: UILabel!
     @IBOutlet weak var txFShowText: UITextField!
@@ -107,6 +109,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     @IBAction func clickButton(_ sender: UIButton) {
         addButton()
         addImagView()
+        isCanUpdateNumberOffset = false
         if self.scrollViewNumber.contentSize.width > self.scrollViewNumber.bounds.size.width {
             let bottomOffset = CGPoint(x: scrollViewNumber.contentSize.width - scrollViewNumber.bounds.size.width, y: 0)
             scrollViewNumber.setContentOffset(bottomOffset, animated: true)
@@ -227,24 +230,47 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
 
     var numberIndext = 0
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        numberIndext = Int(scrollViewMain.contentOffset.x) / Int(numberFrameXibWidth)
+        if scrollView == scrollViewMain && isCanUpdateNumberOffset == true{
+              numberIndext = Int(scrollViewMain.contentOffset.x) / Int(numberFrameXibWidth)
+            //Edited by Manh Nguyen
+            //update srollviewNumber
+            let distanceX = scrollViewNumber.contentSize.width - scrollViewNumber.bounds.size.width
+            var widthScroll:CGFloat =  CGFloat(numberIndext  * numberWidth) 
+            if widthScroll < 0 {
+                widthScroll = 0
+            }else if widthScroll >= distanceX{
+                widthScroll = distanceX
+            }
+            
+            let bottomOffset = CGPoint(x: widthScroll , y: 0)
+            scrollViewNumber.setContentOffset(bottomOffset, animated: true)
+            let btnButtonNumber:UIButton = arrNumbers[numberIndext]
+            
+            for but in arrNumbers {
+                if but != btnButtonNumber {
+                    but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                } else {
+                    btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+                }
+            }
+        }
+      
        // print("indext:  \(numberIndext)")
 
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView == scrollViewMain {
+            //set can update
+            isCanUpdateNumberOffset = true
+            
+        }
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("kasjdjkasd\(numberIndext)")
-        let widthScroll:CGFloat =  CGFloat(numberIndext  * numberWidth)
-        let bottomOffset = CGPoint(x: widthScroll , y: 0)
-        scrollViewNumber.setContentOffset(bottomOffset, animated: true)
-        let btnButtonNumber:UIButton = arrNumbers[numberIndext]
-        for but in arrNumbers {
-            if but != btnButtonNumber {
-                but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            } else {
-                btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
-            }
-        }
+        
+      
         
     }
     //Show Text Main
@@ -261,6 +287,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     @IBAction func segMentedMenu(_ sender: UISegmentedControl) {
           self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
     }
+    
 }
 
 extension CGFloat {

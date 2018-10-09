@@ -9,16 +9,19 @@
 import UIKit
 
 protocol EmojViewControllerDelegate: class {
+    
     func emojViewController(_ viewcontroller: EmojViewController, didSelect emoji: String)
 }
 
 class EmojViewController: UIViewController {
     @IBOutlet weak var eMojCollection: UICollectionView!
+    
     weak var delegate: EmojViewControllerDelegate? = nil
 
     var emojiList: [[String]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        eMojCollection.allowsMultipleSelection = true
          let collectionViewLayout = UICollectionViewFlowLayout()
         fetchEmojis()
         eMojCollection.register(UINib(nibName: "CellEmojCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "CellEmojCollectionViewCell")
@@ -59,6 +62,7 @@ extension EmojViewController: UICollectionViewDataSource {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellEmojCollectionViewCell", for: indexPath) as? CellEmojCollectionViewCell else { return UICollectionViewCell() }
         cell.imagEmoj.image = emojiList[indexPath.section][indexPath.item].image()
+
         return cell
     }
 
