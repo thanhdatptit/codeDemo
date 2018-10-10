@@ -16,31 +16,31 @@ protocol EmojViewControllerDelegate: class {
 class EmojViewController: UIViewController {
     @IBOutlet weak var eMojCollection: UICollectionView!
     
-    weak var delegate: EmojViewControllerDelegate? = nil
+    weak var delegate: EmojViewControllerDelegate?
 
     var emojiList: [[String]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         eMojCollection.allowsMultipleSelection = true
-         let collectionViewLayout = UICollectionViewFlowLayout()
         fetchEmojis()
         eMojCollection.register(UINib(nibName: "CellEmojCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "CellEmojCollectionViewCell")
         eMojCollection.delegate = self
         eMojCollection.dataSource = self
-        collectionViewLayout.minimumLineSpacing = 10
-        collectionViewLayout.minimumInteritemSpacing = 10
     }
 
     func fetchEmojis(){
         let emojiRanges = [
             0x1F601...0x1F635
-            //                        0x2702...0x27B0,
+            //0x2702...0x27B0,
             //                        0x1F680...0x1F6C0,
             //                        0x1F170...0x1F251
         ]
 
         for range in emojiRanges {
-            var array: [String] = []
+            var array: [String] = ["👻","❤️","🤩","💔"]
             for i in range {
                 if let unicodeScalar = UnicodeScalar(i){
                     array.append(String(describing: unicodeScalar))

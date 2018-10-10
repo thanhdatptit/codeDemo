@@ -11,52 +11,87 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     var views:[UIView]!
-  
 
-    var customKeyBoardAccessView: UIView!
-    var txfInput : UITextField!
-    var numberFrameXibWidth:CGFloat = 0
-    var numberFrameXibheigh:CGFloat = 0
-    let numberWidth = 52
-    let spaceSwidth = 10
-    let numberheigh = 52
-    var isCanUpdateNumberOffset:Bool = false
-    var currentItemIdx: NSInteger = 0
-    
+    var arrMenuSelect = [UIButton]()
+    fileprivate var numberWidthMenuSelect = 0
+    fileprivate var numberheighMenuSelect = 52
 
-    @IBOutlet weak var lblTest: UILabel!
+    fileprivate var customKeyBoardAccessView: UIView!
+    fileprivate var txfInput : UITextField!
+    fileprivate var numberFrameXibWidth:CGFloat = 0
+    fileprivate var numberFrameXibheigh:CGFloat = 0
+    fileprivate let numberWidth = 38
+    fileprivate let spaceSwidth = 10
+    fileprivate let numberheigh = 38
+    fileprivate var isCanUpdateNumberOffset:Bool = false
+    fileprivate var currentItemIdx: NSInteger = 0
+
+    @IBOutlet weak var scrollMenuBot: UIScrollView!
     @IBOutlet weak var txFShowText: UITextField!
     @IBOutlet weak var scrollViewNumber: UIScrollView!
     @IBOutlet weak var scrollViewMain: UIScrollView!
 
     @IBOutlet weak var viewMenuBottom: UIView!
-    @IBOutlet weak var segmentedClickMenu: UISegmentedControl!
 
     var arrNumbers = [UIButton]()
     var arrXib = [UIView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        scrollMenuBot.delegate = self
+        addButton12()
+        cusTomView()
+    }
+
+    func addButton12() {
+        for i in 0...4 {
+            numberWidthMenuSelect = Int(scrollMenuBot.frame.size.width / 5)
+            let number = arrMenuSelect.count
+            let originY = 0
+            var originX = 0
+
+            for _ in 0..<number {
+                originX +=  numberWidthMenuSelect
+            }
+
+            let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidthMenuSelect, height: numberheighMenuSelect))
+            button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+            scrollMenuBot.addSubview(button)
+            arrMenuSelect.append(button)
+            scrollMenuBot.contentSize.width = CGFloat(originX + numberWidthMenuSelect)
+            //scrollView.isPagingEnabled = true
+            button.setTitle("\(number + 1)", for: .normal)
+            button.addTarget(self, action: #selector(clickItem12), for: .touchUpInside)
+            button.tag = i
+        }
+        arrMenuSelect[1].setTitle("hello", for: .normal)
+        arrMenuSelect[0].setTitle("hello12", for: .normal)
+    }
+
+    @objc func clickItem12(sender:UIButton) {
+        self.viewMenuBottom.bringSubview(toFront: views[sender.tag])
+     //   self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
+    }
+
+    func cusTomView() {
+
         //Edited By Manh Nguyen
         txFShowText.isHidden = true
         customKeyBoardAccessView = UIView(frame: CGRect(x: 0, y: 0, width: Constant.VIEW_ACCSESS_KEYB_SIZE.width, height: Constant.VIEW_ACCSESS_KEYB_SIZE.height))
-        
+
         txfInput = UITextField(frame: CGRect(x: 5, y: Constant.VIEW_ACCSESS_KEYB_SIZE.height / 2 - Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height / 2, width: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.width, height: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height))
         txfInput.backgroundColor = UIColor.clear
         txfInput.addTarget(self, action: #selector(textInputChanged), for: UIControlEvents.editingChanged)
-        
+
         txfInput.tag = 10;
         txfInput.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         txfInput.delegate = self
         customKeyBoardAccessView.addSubview(txfInput)
         customKeyBoardAccessView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-//        txFShowText.inputAccessoryView = customKeyBoardAccessView
-        
-        
-        
+        //        txFShowText.inputAccessoryView = customKeyBoardAccessView
+
         numberFrameXibWidth = scrollViewMain.frame.size.width
-        numberFrameXibheigh = scrollViewMain.frame.size.width
+        numberFrameXibheigh = scrollViewMain.frame.size.height
         scrollViewNumber.showsVerticalScrollIndicator = false
         scrollViewNumber.showsHorizontalScrollIndicator = false
         scrollViewMain.showsVerticalScrollIndicator = false
@@ -68,15 +103,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         // SegMented
         views = [UIView]()
         let vc1 = EmojViewController()
+        vc1.view.frame = CGRect(x: 0, y: 0, width: viewMenuBottom.frame.width, height: viewMenuBottom.frame.height)
         vc1.delegate = self
         let vc2 = TextImageViewController()
-     //   vc2.delete = self
+        vc2.view.frame = CGRect(x: 0, y: 0, width: viewMenuBottom.frame.width, height: viewMenuBottom.frame.height)
+        vc2.delegate = self
         let vc3 = ColorBackgroungViewController()
-     //  vc3.delegate = self
+        vc3.view.frame = CGRect(x: 0, y: 0, width: viewMenuBottom.frame.width, height: viewMenuBottom.frame.height)
+        vc3.delegate = self
         let vc4 = ColorTextViewController()
-     // vc4.delegate = self
+        vc4.view.frame = CGRect(x: 0, y: 0, width: viewMenuBottom.frame.width, height: viewMenuBottom.frame.height)
+        vc4.delegate = self
         let vc5 = ImageCameraViewController()
-    //  vc5.delegate = self
+        vc5.view.frame = CGRect(x: 0, y: 0, width: viewMenuBottom.frame.width, height: viewMenuBottom.frame.height)
+        vc5.delegate = self
         views.append(vc1.view)
         views.append(vc2.view)
         views.append(vc3.view)
@@ -108,7 +148,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         if (currentItem.lblBackground.text?.isEmpty)! {
                 currentItem.lblTut.isHidden = false
         }
-    
     }
     
     @objc func textInputChanged(textView : UITextView) {
@@ -120,8 +159,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     func addButton() {
         let number = arrNumbers.count
-        let originY = 0
-        var originX = 0
+        let originY = 5
+        var originX = 5
         
         for _ in 0..<number {
             originX +=  numberWidth + spaceSwidth
@@ -129,6 +168,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         
         let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidth, height: numberheigh))
         button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+        button.layer.cornerRadius = 5
         scrollViewNumber.addSubview(button)
         arrNumbers.append(button)
         scrollViewNumber.contentSize.width = CGFloat(originX + numberWidth)
@@ -156,12 +196,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
        txFShowText.inputAccessoryView = customKeyBoardAccessView
         txFShowText.becomeFirstResponder()
         txfInput.becomeFirstResponder()
-     
-        
     }
-    
     // MARK: Click add more button
-    
+
+    var arrimageView = [UIImage]()
+
+    @IBAction func upLoadingGifVideo(_ sender: Any) {
+//        for temp in scrollViewMain {
+//            if temp is (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground {
+//                arrimageView.append(&temp)
+//            }
+
+    }
+
+    @IBAction func removeGifVideo(_ sender: Any) {
+
+    }
+
     @IBAction func clickButton(_ sender: UIButton) {
         addButton()
         addImagView()
@@ -169,9 +220,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         if self.scrollViewNumber.contentSize.width > self.scrollViewNumber.bounds.size.width {
             let bottomOffset = CGPoint(x: scrollViewNumber.contentSize.width - scrollViewNumber.bounds.size.width, y: 0)
             scrollViewNumber.setContentOffset(bottomOffset, animated: true)
-            
         }
-        
         print(scrollViewNumber.contentOffset.x)
         currentItemIdx = arrNumbers.count - 1
         let btnButtonNumber:UIButton = arrNumbers[arrNumbers.count - 1]
@@ -182,8 +231,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
                 btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
             }
         }
-        
-        
     }
     
     // MARK: Click scrollview number item
@@ -196,9 +243,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 
         let bottomOffset = CGPoint(x: widthScroll , y: 0)
         scrollViewMain.setContentOffset(bottomOffset, animated: true)
-        
-        
-        
+
         //Edited by Manh Nguyen
         //update scrollviewNumber contentoffset
         
@@ -243,8 +288,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             scrollViewNumber.setContentOffset(scrollMenuOffset, animated: true)
         
         }
-    
-        
         let btnButtonNumber:UIButton = arrNumbers[selectedIdx]
         for but in arrNumbers {
             if but != btnButtonNumber {
@@ -263,15 +306,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     func addImagView() {
         
         let numberXib = arrXib.count
-        var originX:CGFloat = 0
-        let originY = 0
+        var originX:CGFloat = 5
+        let originY:CGFloat = 5
         
         for _ in 0..<numberXib {
             originX += numberFrameXibWidth
         }
         
-        guard let customView = Bundle.main.loadNibNamed("IemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
-        customView.frame = CGRect(x: originX, y: CGFloat(originY), width: numberFrameXibWidth, height: numberFrameXibheigh)
+        guard let customView = Bundle.main.loadNibNamed("ItemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
+        customView.frame = CGRect(x: originX, y: originY, width: numberFrameXibWidth, height: numberFrameXibheigh)
         customView.lblBackground.text = ""
         scrollViewMain.contentSize.width = originX + numberFrameXibWidth
         scrollViewMain.isPagingEnabled = true
@@ -288,11 +331,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             temp1 = customView.tag
         }
     }
-
     var numberIndext = 0
-    
-    
-    
     // MARK:  SCROLLVIEW DELEGATE
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -345,25 +384,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("kasjdjkasd\(numberIndext)")
-        
-      
-        
     }
+
     //Show Text Main
 
     @IBAction func showTextMainBackground(_ sender: UITextField) {
-        //        for element in scrollViewMain.subviews {
-        //            if element is ItemScrollView  {
         (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text = txFShowText.text
-        //            }
-        //        }
     }
-
-    //SegMented
-    @IBAction func segMentedMenu(_ sender: UISegmentedControl) {
-          self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
-    }
-    
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -392,10 +419,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 //        currentItem.lblBackground.text = textField.text! + string;
 //        return true
 //    }
-   
 }
-
-
 
 extension CGFloat {
     static func random() -> CGFloat {
@@ -412,21 +436,37 @@ extension UIColor {
     }
 }
 
-
-
 extension ViewController:EmojViewControllerDelegate {
     
     func emojView(_ viewcontroller: EmojViewController, didSelect emoji: String) {
-        for element in scrollViewMain.subviews {
-            if element is ItemScrollView  {
-                txFShowText.text = txFShowText.text! + emoji
-                (element as! ItemScrollView).lblBackground.text = (element as! ItemScrollView).lblBackground.text! + emoji
-            }
-        }
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text = ((scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text)!  + emoji
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblTut.isHidden = true
+
     }
 }
 
+extension ViewController:ImageCameraViewControllerDelegate {
+    func imageCameraView(_ viewcontroller: ImageCameraViewController, selectImage image: UIImage) {
+   (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground.image = image
+    }
+}
+
+extension ViewController: ColorTextViewControllerDelegate {
+    func colorTextView(_ viewcontroller: ColorTextViewController, didSelect textColor: UIColor) {
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.textColor = textColor
+    }
+}
+
+extension ViewController: ColorBackgroungViewControllerDelegate {
+    func colorBackgroungView(_ viewcontroller: ColorBackgroungViewController, didselectBackground colorBackground: UIColor) {
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+    }
+}
+
+extension ViewController: TextImageViewControllerDelegate {
+    func textImageView(_ viewcontroller: TextImageViewController, didSelectfont fontText: String) {
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = UIFont(name: fontText, size: 35)
+    }
 
 
-
-
+}

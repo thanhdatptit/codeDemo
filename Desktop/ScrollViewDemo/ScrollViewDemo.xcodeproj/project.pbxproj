@@ -14,9 +14,11 @@
 		2501AEF6216997CB007A6018 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2501AEF4216997CB007A6018 /* LaunchScreen.storyboard */; };
 		2501AF01216997CB007A6018 /* ScrollViewDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501AF00216997CB007A6018 /* ScrollViewDemoTests.swift */; };
 		2501AF0C216997CB007A6018 /* ScrollViewDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501AF0B216997CB007A6018 /* ScrollViewDemoUITests.swift */; };
-		25DCFB252169E96B0009F361 /* IemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DCFB242169E96B0009F361 /* IemScrollView.swift */; };
-		25DCFB272169ED0C0009F361 /* IemScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DCFB262169ED0C0009F361 /* IemScrollView.xib */; };
+		25DCFB252169E96B0009F361 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DCFB242169E96B0009F361 /* ItemScrollView.swift */; };
+		25DCFB272169ED0C0009F361 /* ItemScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DCFB262169ED0C0009F361 /* ItemScrollView.xib */; };
 		25FB0EBE216DA7C400C5ADD9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB0EBD216DA7C400C5ADD9 /* Constant.swift */; };
+		2F21226B216E43E10091BD76 /* CellTextItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F212269216E43E10091BD76 /* CellTextItemTableViewCell.swift */; };
+		2F21226C216E43E10091BD76 /* CellTextItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F21226A216E43E10091BD76 /* CellTextItemTableViewCell.xib */; };
 		2F5910C7216B7B6F008B7B85 /* EmojViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5910C5216B7B6F008B7B85 /* EmojViewController.swift */; };
 		2F5910C8216B7B6F008B7B85 /* EmojViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5910C6216B7B6F008B7B85 /* EmojViewController.xib */; };
 		2F5910D0216B7BE5008B7B85 /* TextImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5910CE216B7BE5008B7B85 /* TextImageViewController.swift */; };
@@ -66,9 +68,11 @@
 		2501AF07216997CB007A6018 /* ScrollViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrollViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2501AF0B216997CB007A6018 /* ScrollViewDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDemoUITests.swift; sourceTree = "<group>"; };
 		2501AF0D216997CB007A6018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		25DCFB242169E96B0009F361 /* IemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IemScrollView.swift; sourceTree = "<group>"; };
-		25DCFB262169ED0C0009F361 /* IemScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IemScrollView.xib; sourceTree = "<group>"; };
+		25DCFB242169E96B0009F361 /* ItemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
+		25DCFB262169ED0C0009F361 /* ItemScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemScrollView.xib; sourceTree = "<group>"; };
 		25FB0EBD216DA7C400C5ADD9 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		2F212269216E43E10091BD76 /* CellTextItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextItemTableViewCell.swift; sourceTree = "<group>"; };
+		2F21226A216E43E10091BD76 /* CellTextItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellTextItemTableViewCell.xib; sourceTree = "<group>"; };
 		2F5910C5216B7B6F008B7B85 /* EmojViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojViewController.swift; sourceTree = "<group>"; };
 		2F5910C6216B7B6F008B7B85 /* EmojViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojViewController.xib; sourceTree = "<group>"; };
 		2F5910CE216B7BE5008B7B85 /* TextImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImageViewController.swift; sourceTree = "<group>"; };
@@ -147,8 +151,8 @@
 				2501AEF2216997CB007A6018 /* Assets.xcassets */,
 				2501AEF4216997CB007A6018 /* LaunchScreen.storyboard */,
 				2501AEF7216997CB007A6018 /* Info.plist */,
-				25DCFB242169E96B0009F361 /* IemScrollView.swift */,
-				25DCFB262169ED0C0009F361 /* IemScrollView.xib */,
+				25DCFB242169E96B0009F361 /* ItemScrollView.swift */,
+				25DCFB262169ED0C0009F361 /* ItemScrollView.xib */,
 			);
 			path = ScrollViewDemo;
 			sourceTree = "<group>";
@@ -195,6 +199,8 @@
 			children = (
 				2F5910CE216B7BE5008B7B85 /* TextImageViewController.swift */,
 				2F5910CF216B7BE5008B7B85 /* TextImageViewController.xib */,
+				2F212269216E43E10091BD76 /* CellTextItemTableViewCell.swift */,
+				2F21226A216E43E10091BD76 /* CellTextItemTableViewCell.xib */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -339,7 +345,8 @@
 				2F5910C8216B7B6F008B7B85 /* EmojViewController.xib in Resources */,
 				2F5910E5216B84F1008B7B85 /* CellEmojCollectionViewCell.xib in Resources */,
 				2F5910E9216B8A2D008B7B85 /* CellColorBackgroundCollectionViewCell.xib in Resources */,
-				25DCFB272169ED0C0009F361 /* IemScrollView.xib in Resources */,
+				2F21226C216E43E10091BD76 /* CellTextItemTableViewCell.xib in Resources */,
+				25DCFB272169ED0C0009F361 /* ItemScrollView.xib in Resources */,
 				2501AEF3216997CB007A6018 /* Assets.xcassets in Resources */,
 				2F5910ED216B90F4008B7B85 /* TextColorCollectionViewCell.xib in Resources */,
 				2501AEF1216997CA007A6018 /* Main.storyboard in Resources */,
@@ -373,7 +380,7 @@
 				2F5910E8216B8A2D008B7B85 /* CellColorBackgroundCollectionViewCell.swift in Sources */,
 				2F5910D0216B7BE5008B7B85 /* TextImageViewController.swift in Sources */,
 				2F5910D4216B7C00008B7B85 /* ColorBackgroungViewController.swift in Sources */,
-				25DCFB252169E96B0009F361 /* IemScrollView.swift in Sources */,
+				25DCFB252169E96B0009F361 /* ItemScrollView.swift in Sources */,
 				2F5910E4216B84F1008B7B85 /* CellEmojCollectionViewCell.swift in Sources */,
 				2F5910C7216B7B6F008B7B85 /* EmojViewController.swift in Sources */,
 				2501AEEE216997CA007A6018 /* ViewController.swift in Sources */,
@@ -382,6 +389,7 @@
 				2F5910EC216B90F4008B7B85 /* TextColorCollectionViewCell.swift in Sources */,
 				2F5910D8216B7C48008B7B85 /* ColorTextViewController.swift in Sources */,
 				25FB0EBE216DA7C400C5ADD9 /* Constant.swift in Sources */,
+				2F21226B216E43E10091BD76 /* CellTextItemTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

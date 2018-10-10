@@ -8,13 +8,45 @@
 
 import UIKit
 
-class ImageCameraViewController: UIViewController {
+protocol ImageCameraViewControllerDelegate:class {
+    func imageCameraView (_ viewcontroller:ImageCameraViewController, selectImage image:UIImage)
+}
 
+class ImageCameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    weak var delegate:ImageCameraViewControllerDelegate?
+
+    @IBOutlet weak var cameraImage: UIButton!
+    @IBOutlet weak var libraryImage: UIButton!
+    let imagePickerController = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePickerController.delegate = self
+    }
+
+    @IBAction func camera(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        } else {
+            print("Camera not available")
+        }
 
     }
 
+    @IBAction func libraly(_ sender: Any) {
+        imagePickerController.sourceType = .photoLibrary
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image1 = info[UIImagePickerControllerOriginalImage] as! UIImage
+        delegate?.imageCameraView(self, selectImage: image1)
+
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+
+    }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="98d-v7-u5m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NHo-fz-0Ue">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,11 +8,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="Y4C-Qk-SG5">
             <objects>
                 <viewController id="98d-v7-u5m" customClass="ViewController" customModule="ScrollViewDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,15 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-gE-vdh">
-                                <rect key="frame" x="5" y="38" width="327" height="54"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="5" y="82" width="322" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="bxg-vF-LAE"/>
+                                    <constraint firstAttribute="height" constant="48" id="bxg-vF-LAE"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDj-kt-1xr">
-                                <rect key="frame" x="340" y="38" width="30" height="54"/>
-                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="327" y="82" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZDj-kt-1xr" secondAttribute="height" multiplier="1:1" id="zo8-GU-LOr"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" title="+"/>
                                 <connections>
@@ -37,7 +39,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pze-b8-M1l">
-                                <rect key="frame" x="67.5" y="142" width="240" height="214"/>
+                                <rect key="frame" x="67.5" y="180" width="240" height="214"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pze-b8-M1l" secondAttribute="height" multiplier="120:107" id="6QG-Dg-T5k"/>
                                     <constraint firstAttribute="height" constant="214" id="N8U-5b-qse"/>
@@ -47,21 +49,8 @@
                                 <rect key="frame" x="0.0" y="476.5" width="375" height="190.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b1i-Zf-WCO">
-                                <rect key="frame" x="0.0" y="448.5" width="375" height="29"/>
-                                <segments>
-                                    <segment title="1"/>
-                                    <segment title="2"/>
-                                    <segment title="3"/>
-                                    <segment title="4"/>
-                                    <segment title="5"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segMentedMenu:" destination="98d-v7-u5m" eventType="valueChanged" id="IXO-J3-iEf"/>
-                                </connections>
-                            </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gip-RR-Jrr">
-                                <rect key="frame" x="20" y="389" width="335" height="30"/>
+                                <rect key="frame" x="20" y="391.5" width="335" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -69,47 +58,78 @@
                                     <action selector="showTextMainBackground:" destination="98d-v7-u5m" eventType="editingChanged" id="YH9-mc-Z8i"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnN-VJ-wy3">
-                                <rect key="frame" x="92" y="100" width="163" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0U-hk-i2B">
+                                <rect key="frame" x="0.0" y="436.5" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0f1-N0-VKx"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZDj-kt-1xr" firstAttribute="height" secondItem="Wwz-gE-vdh" secondAttribute="height" id="0Wr-F8-KhW"/>
-                            <constraint firstItem="b1i-Zf-WCO" firstAttribute="top" secondItem="Gip-RR-Jrr" secondAttribute="bottom" constant="30" id="1sc-Mu-jNX"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="3U3-0W-FKC" secondAttribute="trailing" id="2Oa-uB-Fab"/>
+                            <constraint firstItem="Z0U-hk-i2B" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" id="4J4-tF-Wfd"/>
+                            <constraint firstItem="3U3-0W-FKC" firstAttribute="top" secondItem="Z0U-hk-i2B" secondAttribute="bottom" id="8Oh-JR-x0h"/>
                             <constraint firstItem="3U3-0W-FKC" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" id="DBf-nl-7X2"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="Gip-RR-Jrr" secondAttribute="trailing" constant="20" id="Ecq-7L-T3o"/>
-                            <constraint firstItem="b1i-Zf-WCO" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" id="FLZ-TR-353"/>
                             <constraint firstItem="3U3-0W-FKC" firstAttribute="height" secondItem="ggq-XS-eWy" secondAttribute="height" multiplier="1/3.5" id="FeP-o1-UbB"/>
-                            <constraint firstItem="3U3-0W-FKC" firstAttribute="top" secondItem="b1i-Zf-WCO" secondAttribute="bottom" id="KMF-za-U6X"/>
                             <constraint firstItem="ZDj-kt-1xr" firstAttribute="top" secondItem="Wwz-gE-vdh" secondAttribute="top" id="LcR-W6-MPw"/>
                             <constraint firstItem="Wwz-gE-vdh" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" constant="5" id="Mp1-wG-td4"/>
+                            <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="Z0U-hk-i2B" secondAttribute="trailing" id="SSC-SE-yVq"/>
                             <constraint firstItem="pze-b8-M1l" firstAttribute="top" secondItem="Wwz-gE-vdh" secondAttribute="bottom" constant="50" id="b4d-2J-yX1"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="bottom" secondItem="3U3-0W-FKC" secondAttribute="bottom" id="cr0-Aa-962"/>
-                            <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="ZDj-kt-1xr" secondAttribute="trailing" constant="5" id="dWA-O9-29B"/>
-                            <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="b1i-Zf-WCO" secondAttribute="trailing" id="e4K-4P-90x"/>
-                            <constraint firstItem="ZDj-kt-1xr" firstAttribute="leading" secondItem="Wwz-gE-vdh" secondAttribute="trailing" constant="8" id="hnW-Zk-OfU"/>
+                            <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="ZDj-kt-1xr" secondAttribute="trailing" id="dWA-O9-29B"/>
+                            <constraint firstItem="Z0U-hk-i2B" firstAttribute="top" secondItem="Gip-RR-Jrr" secondAttribute="bottom" constant="15" id="h5Y-fm-d6O"/>
+                            <constraint firstItem="ZDj-kt-1xr" firstAttribute="leading" secondItem="Wwz-gE-vdh" secondAttribute="trailing" id="hnW-Zk-OfU"/>
                             <constraint firstItem="Gip-RR-Jrr" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" constant="20" id="icU-EB-tQp"/>
                             <constraint firstItem="pze-b8-M1l" firstAttribute="centerX" secondItem="ggq-XS-eWy" secondAttribute="centerX" id="xOC-5M-b0j"/>
                             <constraint firstItem="Wwz-gE-vdh" firstAttribute="top" secondItem="40f-Zh-K3F" secondAttribute="top" constant="18" id="xvc-wA-sq8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="40f-Zh-K3F"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Home" id="NGh-Nk-Ecn">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="nin-8O-1JZ">
+                                <connections>
+                                    <action selector="upLoadingGifVideo:" destination="98d-v7-u5m" id="dhz-ST-yG8"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="ONk-bm-kbP">
+                                <connections>
+                                    <action selector="removeGifVideo:" destination="98d-v7-u5m" id="HoW-4B-KRM"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
-                        <outlet property="lblTest" destination="DnN-VJ-wy3" id="MZc-Ch-Pri"/>
+                        <outlet property="scrollMenuBot" destination="Z0U-hk-i2B" id="6CX-1Y-9N5"/>
                         <outlet property="scrollViewMain" destination="pze-b8-M1l" id="LIw-Mt-Meh"/>
                         <outlet property="scrollViewNumber" destination="Wwz-gE-vdh" id="dd7-s2-5bD"/>
-                        <outlet property="segmentedClickMenu" destination="b1i-Zf-WCO" id="JOT-Zu-e7h"/>
                         <outlet property="txFShowText" destination="Gip-RR-Jrr" id="pYX-2b-Tca"/>
                         <outlet property="viewMenuBottom" destination="3U3-0W-FKC" id="3Wh-Tc-1eb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2x-KO-tdv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="224.80000000000001" y="31.934032983508249"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xff-xB-4JP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NHo-fz-0Ue" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="epg-ng-CiA">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="98d-v7-u5m" kind="relationship" relationship="rootViewController" id="GAd-rL-o03"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Nc-f1-0zV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-714.39999999999998" y="31.934032983508249"/>
         </scene>

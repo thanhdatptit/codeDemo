@@ -8,40 +8,46 @@
 
 import UIKit
 
+protocol TextImageViewControllerDelegate:class {
+    func textImageView (_ viewcontroller:TextImageViewController, didSelectfont fontText: String)
+}
+
 class TextImageViewController: UIViewController {
 
-    @IBOutlet weak var textPickerView: UIPickerView!
-    let gradePickerValues = ["5. Klasse", "6. Klasse", "7. Klasse","8. Klasse", "9. Klasse", "10. Klasse"]
+    @IBOutlet weak var tbVTextItem: UITableView!
+
+    let gradePickerValues = ["Party LET", "Alex Brush", "Arial","Courier New", "charter", "Didot"]
+    weak var delegate:TextImageViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textPickerView.dataSource = self
-        textPickerView.delegate = self
-
-//        gradeTextField.inputView = gradePicker
-//        gradeTextField.text = gradePickerValues[0]
-
+        tbVTextItem.delegate = self
+        tbVTextItem.dataSource = self
     }
-
 }
-
-extension TextImageViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+extension TextImageViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gradePickerValues.count
     }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gradePickerValues[row]
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = Bundle.main.loadNibNamed("CellTextItemTableViewCell", owner: self, options: nil)?.first as? CellTextItemTableViewCell else { return UITableViewCell() }
+        cell.lblShowNameText.font = UIFont(name: gradePickerValues[indexPath.row], size: 30)
+        cell.lblShowNameText.text = gradePickerValues[indexPath.row]
+        return cell
+    }
+}
+extension TextImageViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let frontText = gradePickerValues[indexPath.row]
+        print(frontText)
+        delegate?.textImageView(self, didSelectfont: frontText)
     }
 }
 
-extension TextImageViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(String(row))
-    }
-}
 
-//    @IBOutlet weak var gradeTextField: UITextField!

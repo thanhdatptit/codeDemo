@@ -22,8 +22,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jLw-PW-eWc">
-                    <rect key="frame" x="0.0" y="0.0" width="377" height="192"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="0.0" y="0.0" width="377" height="217"/>
+                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BQC-ca-wAq">
                         <size key="itemSize" width="60" height="60"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -35,7 +35,7 @@
             <constraints>
                 <constraint firstItem="jLw-PW-eWc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Fp1-OF-NjZ"/>
                 <constraint firstItem="jLw-PW-eWc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UQa-Vc-ePc"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jLw-PW-eWc" secondAttribute="bottom" constant="25" id="ZlR-ID-WBX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jLw-PW-eWc" secondAttribute="bottom" id="ZlR-ID-WBX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jLw-PW-eWc" secondAttribute="trailing" id="xBX-gy-s9Q"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

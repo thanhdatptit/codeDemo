@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextImageViewController" customModule="ScrollViewDemo" customModuleProvider="target">
             <connections>
-                <outlet property="textPickerView" destination="UOz-PD-Gfr" id="8YA-h8-1yS"/>
+                <outlet property="tbVTextItem" destination="9Au-jp-fT0" id="nUV-08-kZF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,16 +21,17 @@
             <rect key="frame" x="0.0" y="0.0" width="404" height="232"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOz-PD-Gfr">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Au-jp-fT0">
                     <rect key="frame" x="0.0" y="0.0" width="404" height="232"/>
-                </pickerView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="UOz-PD-Gfr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2O4-mP-U1s"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UOz-PD-Gfr" secondAttribute="bottom" id="c5l-Fq-8Md"/>
-                <constraint firstItem="UOz-PD-Gfr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="db2-Zv-M5u"/>
-                <constraint firstItem="UOz-PD-Gfr" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hib-Xd-cLK"/>
+                <constraint firstItem="9Au-jp-fT0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="An1-l5-UTw"/>
+                <constraint firstItem="9Au-jp-fT0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="c49-Ei-Oht"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9Au-jp-fT0" secondAttribute="trailing" id="gEG-YK-2XR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9Au-jp-fT0" secondAttribute="bottom" id="oRo-k8-cgW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

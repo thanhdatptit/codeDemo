@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageCameraViewController" customModule="ScrollViewDemo" customModuleProvider="target">
             <connections>
+                <outlet property="cameraImage" destination="hgR-ve-yJF" id="Ab1-xJ-mud"/>
+                <outlet property="libraryImage" destination="B3p-Y0-4DH" id="0rn-zW-i83"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,11 +29,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="149.5" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="camera:" destination="-1" eventType="touchUpInside" id="pDO-1F-0bj"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3p-Y0-4DH">
                             <rect key="frame" x="181.5" y="0.0" width="149.5" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="libraly:" destination="-1" eventType="touchUpInside" id="eFd-7p-bXD"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
