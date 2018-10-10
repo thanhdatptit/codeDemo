@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     var views:[UIView]!
+
+
    
     var numberFrameXibWidth:CGFloat = 0
     var numberFrameXibheigh:CGFloat = 0
@@ -276,11 +278,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     //Show Text Main
 
     @IBAction func showTextMainBackground(_ sender: UITextField) {
-//        guard let customView = Bundle.main.loadNibNamed("IemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
-       // customView.frame = CGRect(x: originX, y: CGFloat(originY), width: numberFrameXibWidth, height: numberFrameXibheigh)
-     //   customView.indext.text = txFShowText.text
-    //    lblTextViewMain.text = txFShowText.text
-
+        //        for element in scrollViewMain.subviews {
+        //            if element is ItemScrollView  {
+        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text = txFShowText.text
+        //            }
+        //        }
     }
 
     //SegMented
@@ -305,9 +307,13 @@ extension UIColor {
     }
 }
 
-extension ViewController: EmojViewControllerDelegate {
-    func emojViewController(_ viewcontroller: EmojViewController, didSelect emoji: String) {
-        lblTest.text = emoji
+extension ViewController:EmojViewControllerDelegate {
+    func emojView(_ viewcontroller: EmojViewController, didSelect emoji: String) {
+        for element in scrollViewMain.subviews {
+            if element is ItemScrollView  {
+                txFShowText.text = txFShowText.text! + emoji
+                (element as! ItemScrollView).lblBackground.text = (element as! ItemScrollView).lblBackground.text! + emoji
+            }
+        }
     }
 }
-

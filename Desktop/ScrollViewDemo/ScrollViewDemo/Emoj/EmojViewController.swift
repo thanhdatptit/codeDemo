@@ -8,9 +8,9 @@
 
 import UIKit
 
+
 protocol EmojViewControllerDelegate: class {
-    
-    func emojViewController(_ viewcontroller: EmojViewController, didSelect emoji: String)
+    func emojView (_ viewcontroller: EmojViewController, didSelect emoji: String)
 }
 
 class EmojViewController: UIViewController {
@@ -76,7 +76,7 @@ extension EmojViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let emoji = emojiList[indexPath.section][indexPath.item]
         print(emoji)
-        delegate?.emojViewController(self, didSelect: emoji)
+        delegate?.emojView(self, didSelect: emoji)
     }
 }
 
