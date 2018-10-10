@@ -8,18 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     var views:[UIView]!
+  
 
-
-   
+    var customKeyBoardAccessView: UIView!
+    var txfInput : UITextField!
     var numberFrameXibWidth:CGFloat = 0
     var numberFrameXibheigh:CGFloat = 0
     let numberWidth = 52
     let spaceSwidth = 10
     let numberheigh = 52
     var isCanUpdateNumberOffset:Bool = false
+    var currentItemIdx: NSInteger = 0
     
 
     @IBOutlet weak var lblTest: UILabel!
@@ -32,12 +34,33 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
 
     var arrNumbers = [UIButton]()
     var arrXib = [UIView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Edited By Manh Nguyen
+        txFShowText.isHidden = true
+        customKeyBoardAccessView = UIView(frame: CGRect(x: 0, y: 0, width: Constant.VIEW_ACCSESS_KEYB_SIZE.width, height: Constant.VIEW_ACCSESS_KEYB_SIZE.height))
+        
+        txfInput = UITextField(frame: CGRect(x: 5, y: Constant.VIEW_ACCSESS_KEYB_SIZE.height / 2 - Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height / 2, width: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.width, height: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height))
+        txfInput.backgroundColor = UIColor.clear
+        txfInput.addTarget(self, action: #selector(textInputChanged), for: UIControlEvents.editingChanged)
+        
+        txfInput.tag = 10;
+        txfInput.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        txfInput.delegate = self
+        customKeyBoardAccessView.addSubview(txfInput)
+        customKeyBoardAccessView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+//        txFShowText.inputAccessoryView = customKeyBoardAccessView
+        
+        
+        
         numberFrameXibWidth = scrollViewMain.frame.size.width
         numberFrameXibheigh = scrollViewMain.frame.size.width
         scrollViewNumber.showsVerticalScrollIndicator = false
         scrollViewNumber.showsHorizontalScrollIndicator = false
+        scrollViewMain.showsVerticalScrollIndicator = false
+        scrollViewMain.showsHorizontalScrollIndicator = false
         scrollViewNumber.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.3)
         addButton()
         addImagView()
@@ -81,6 +104,16 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     @objc func dismissKeyboard(){
         view.endEditing(true)
         txFShowText.resignFirstResponder()
+        let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+        if (currentItem.lblBackground.text?.isEmpty)! {
+                currentItem.lblTut.isHidden = false
+        }
+    
+    }
+    
+    @objc func textInputChanged(textView : UITextView) {
+          let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+            currentItem.lblBackground.text = textView.text;
     }
     
     // add more number scrollview's item
@@ -100,13 +133,34 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
         arrNumbers.append(button)
         scrollViewNumber.contentSize.width = CGFloat(originX + numberWidth)
         scrollViewNumber.isPagingEnabled = true
+        let tapGest: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedScrollViewMain))
+        scrollViewMain.addGestureRecognizer(tapGest)
         button.setTitle("\(number + 1)", for: .normal)
         button.addTarget(self, action: #selector(clickItem), for: .touchUpInside)
         button.tag = arrNumbers.count - 1
     }
     
+    // MARK: Tap Scrollview main
     
-    // Click add more button
+    @objc func tappedScrollViewMain(_ tap : UITapGestureRecognizer) {
+        
+        let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+        currentItem.lblTut.isHidden = true
+        if  (currentItem.lblBackground.text?.isEmpty)!{
+            txfInput.text = ""
+            txfInput.placeholder = "dfd"
+        }
+        //        txfInput.text = currentItem.lblBackground.text;
+//        print("\(txfInput) as ")
+       
+       txFShowText.inputAccessoryView = customKeyBoardAccessView
+        txFShowText.becomeFirstResponder()
+        txfInput.becomeFirstResponder()
+     
+        
+    }
+    
+    // MARK: Click add more button
     
     @IBAction func clickButton(_ sender: UIButton) {
         addButton()
@@ -119,6 +173,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
         }
         
         print(scrollViewNumber.contentOffset.x)
+        currentItemIdx = arrNumbers.count - 1
         let btnButtonNumber:UIButton = arrNumbers[arrNumbers.count - 1]
         for but in arrNumbers {
             if but != btnButtonNumber {
@@ -131,11 +186,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
         
     }
     
-    // Click scrollview number item
+    // MARK: Click scrollview number item
     @objc func clickItem(sender:UIButton) {
         
         print("clicked item number")
         let selectedIdx = sender.tag
+        currentItemIdx = selectedIdx
         let widthScroll:CGFloat =  CGFloat(selectedIdx)  * numberFrameXibWidth
 
         let bottomOffset = CGPoint(x: widthScroll , y: 0)
@@ -202,7 +258,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     }
     
      var temp1 = 0
+    
+     // MARK: Main Scroll ITEM
     func addImagView() {
+        
         let numberXib = arrXib.count
         var originX:CGFloat = 0
         let originY = 0
@@ -213,7 +272,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
         
         guard let customView = Bundle.main.loadNibNamed("IemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
         customView.frame = CGRect(x: originX, y: CGFloat(originY), width: numberFrameXibWidth, height: numberFrameXibheigh)
-        
+        customView.lblBackground.text = ""
         scrollViewMain.contentSize.width = originX + numberFrameXibWidth
         scrollViewMain.isPagingEnabled = true
         print("X \(originX)")
@@ -231,21 +290,36 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
     }
 
     var numberIndext = 0
+    
+    
+    
+    // MARK:  SCROLLVIEW DELEGATE
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == scrollViewMain && isCanUpdateNumberOffset == true{
-              numberIndext = Int(scrollViewMain.contentOffset.x) / Int(numberFrameXibWidth)
+            if self.scrollViewNumber.contentSize.width > self.scrollViewNumber.bounds.size.width{
+                
+            }
+            numberIndext = Int(scrollViewMain.contentOffset.x) / Int(numberFrameXibWidth)
+            currentItemIdx = numberIndext
             //Edited by Manh Nguyen
             //update srollviewNumber
             let distanceX = scrollViewNumber.contentSize.width - scrollViewNumber.bounds.size.width
-            var widthScroll:CGFloat =  CGFloat(numberIndext  * numberWidth) 
-            if widthScroll < 0 {
-                widthScroll = 0
-            }else if widthScroll >= distanceX{
-                widthScroll = distanceX
+            if distanceX > 0{
+                var widthScroll:CGFloat =  CGFloat(numberIndext  * numberWidth)
+                if widthScroll < 0 {
+                    widthScroll = 0
+                }else if widthScroll >= distanceX{
+                    widthScroll = distanceX
+                }
+                
+                let bottomOffset = CGPoint(x: widthScroll , y: 0)
+                scrollViewNumber.setContentOffset(bottomOffset, animated: true)
+                
+            }else{
+                
             }
-            
-            let bottomOffset = CGPoint(x: widthScroll , y: 0)
-            scrollViewNumber.setContentOffset(bottomOffset, animated: true)
+           
             let btnButtonNumber:UIButton = arrNumbers[numberIndext]
             
             for but in arrNumbers {
@@ -290,7 +364,38 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognize
           self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
     }
     
+    
+    // MARK: TextField Delegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        if textField.tag == 10{
+            let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+            if  (currentItem.lblBackground.text?.isEmpty)!{
+                txfInput.attributedPlaceholder = NSAttributedString(string: "Wirte something to add",
+                                                                       attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                
+            }
+            else{
+                 textField.text =  currentItem.lblBackground.text
+            }
+          
+//            self.view.endEditing(true)
+//            textField.becomeFirstResponder()
+//            return true
+        }
+       return true
+    }
+//
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//
+//        let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+//        currentItem.lblBackground.text = textField.text! + string;
+//        return true
+//    }
+   
 }
+
+
 
 extension CGFloat {
     static func random() -> CGFloat {
@@ -307,7 +412,10 @@ extension UIColor {
     }
 }
 
+
+
 extension ViewController:EmojViewControllerDelegate {
+    
     func emojView(_ viewcontroller: EmojViewController, didSelect emoji: String) {
         for element in scrollViewMain.subviews {
             if element is ItemScrollView  {
@@ -317,3 +425,8 @@ extension ViewController:EmojViewControllerDelegate {
         }
     }
 }
+
+
+
+
+

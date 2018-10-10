@@ -16,6 +16,7 @@
 		2501AF0C216997CB007A6018 /* ScrollViewDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501AF0B216997CB007A6018 /* ScrollViewDemoUITests.swift */; };
 		25DCFB252169E96B0009F361 /* IemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DCFB242169E96B0009F361 /* IemScrollView.swift */; };
 		25DCFB272169ED0C0009F361 /* IemScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DCFB262169ED0C0009F361 /* IemScrollView.xib */; };
+		25FB0EBE216DA7C400C5ADD9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB0EBD216DA7C400C5ADD9 /* Constant.swift */; };
 		2F5910C7216B7B6F008B7B85 /* EmojViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5910C5216B7B6F008B7B85 /* EmojViewController.swift */; };
 		2F5910C8216B7B6F008B7B85 /* EmojViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5910C6216B7B6F008B7B85 /* EmojViewController.xib */; };
 		2F5910D0216B7BE5008B7B85 /* TextImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5910CE216B7BE5008B7B85 /* TextImageViewController.swift */; };
@@ -67,6 +68,7 @@
 		2501AF0D216997CB007A6018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25DCFB242169E96B0009F361 /* IemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IemScrollView.swift; sourceTree = "<group>"; };
 		25DCFB262169ED0C0009F361 /* IemScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IemScrollView.xib; sourceTree = "<group>"; };
+		25FB0EBD216DA7C400C5ADD9 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		2F5910C5216B7B6F008B7B85 /* EmojViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojViewController.swift; sourceTree = "<group>"; };
 		2F5910C6216B7B6F008B7B85 /* EmojViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojViewController.xib; sourceTree = "<group>"; };
 		2F5910CE216B7BE5008B7B85 /* TextImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImageViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		2501AEEA216997CA007A6018 /* ScrollViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				25FB0EBC216DA77F00C5ADD9 /* Custome */,
 				2F5910C9216B7B79008B7B85 /* Emoj */,
 				2F5910CA216B7B86008B7B85 /* Text */,
 				2F5910CB216B7B98008B7B85 /* Background */,
@@ -166,6 +169,14 @@
 				2501AF0D216997CB007A6018 /* Info.plist */,
 			);
 			path = ScrollViewDemoUITests;
+			sourceTree = "<group>";
+		};
+		25FB0EBC216DA77F00C5ADD9 /* Custome */ = {
+			isa = PBXGroup;
+			children = (
+				25FB0EBD216DA7C400C5ADD9 /* Constant.swift */,
+			);
+			path = Custome;
 			sourceTree = "<group>";
 		};
 		2F5910C9216B7B79008B7B85 /* Emoj */ = {
@@ -370,6 +381,7 @@
 				2501AEEC216997CA007A6018 /* AppDelegate.swift in Sources */,
 				2F5910EC216B90F4008B7B85 /* TextColorCollectionViewCell.swift in Sources */,
 				2F5910D8216B7C48008B7B85 /* ColorTextViewController.swift in Sources */,
+				25FB0EBE216DA7C400C5ADD9 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

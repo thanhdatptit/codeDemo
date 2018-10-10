@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,13 +25,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap To Add Text Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-WV-3Ht">
+                    <rect key="frame" x="84.5" y="92" width="172.5" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qri-zF-Vi5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="CPS-ZQ-WKm"/>
+                <constraint firstItem="ioM-WV-3Ht" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DUQ-gZ-LP4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aAg-le-Imy" secondAttribute="trailing" id="RuT-dv-eDz"/>
                 <constraint firstItem="aAg-le-Imy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="T0R-7I-WM7"/>
                 <constraint firstItem="qri-zF-Vi5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="TTw-4P-cXn"/>
+                <constraint firstItem="ioM-WV-3Ht" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WRg-yK-jyq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="aAg-le-Imy" secondAttribute="bottom" id="esZ-OH-dP8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qri-zF-Vi5" secondAttribute="trailing" id="he8-MD-hu7"/>
                 <constraint firstItem="aAg-le-Imy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="qan-sM-ruq"/>
@@ -42,6 +50,7 @@
             <connections>
                 <outlet property="imagBackground" destination="qri-zF-Vi5" id="pmu-73-643"/>
                 <outlet property="lblBackground" destination="aAg-le-Imy" id="jti-8o-yAn"/>
+                <outlet property="lblTut" destination="ioM-WV-3Ht" id="Jf9-uD-fA2"/>
             </connections>
             <point key="canvasLocation" x="22.5" y="-156.5"/>
         </view>

@@ -12,5 +12,6 @@ class ItemScrollView: UIView {
     @IBOutlet weak var imagBackground: UIImageView!
     @IBOutlet weak var lblBackground: UILabel!
     
+    @IBOutlet weak var lblTut: UILabel!
 }
 
