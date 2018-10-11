@@ -394,7 +394,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-
+       let test = 0
         if textField.tag == 10{
             let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
             if  (currentItem.lblBackground.text?.isEmpty)!{
@@ -456,7 +456,7 @@ extension ViewController: ColorTextViewControllerDelegate {
         (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.textColor = textColor
     }
 }
-
+//vl
 extension ViewController: ColorBackgroungViewControllerDelegate {
     func colorBackgroungView(_ viewcontroller: ColorBackgroungViewController, didselectBackground colorBackground: UIColor) {
         (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
