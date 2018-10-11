@@ -115,20 +115,83 @@
             </objects>
             <point key="canvasLocation" x="224.80000000000001" y="31.934032983508249"/>
         </scene>
-        <!--View Controller-->
+        <!--Gif And Camera View Controller-->
         <scene sceneID="mJy-go-gXn">
             <objects>
-                <viewController id="mZV-3c-877" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GifAndCameraViewController" id="mZV-3c-877" customClass="GifAndCameraViewController" customModule="ScrollViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cw1-H1-9h6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1m-iv-zeX">
+                                <rect key="frame" x="0.0" y="20" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KBv-Vw-LBV"/>
+                                    <constraint firstAttribute="width" constant="46" id="TRR-jZ-8sl"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="disMiss:" destination="mZV-3c-877" eventType="touchUpInside" id="SEt-L5-v9a"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aJ9-wk-9Ev">
+                                <rect key="frame" x="20" y="318.5" width="335" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2I-6M-VaO">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                        <color key="backgroundColor" red="0.81935709376084476" green="0.64756451060068032" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Gif"/>
+                                        <connections>
+                                            <action selector="audioGif:" destination="mZV-3c-877" eventType="touchUpInside" id="WRL-Tf-0fI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-eR-58H">
+                                        <rect key="frame" x="175" y="0.0" width="160" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.43539714875300917" blue="0.83373085126883173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="video"/>
+                                        <connections>
+                                            <action selector="audioVideo:" destination="mZV-3c-877" eventType="touchUpInside" id="Fr5-jB-kT6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Bm-Ja-Mfg">
+                                <rect key="frame" x="67" y="120" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.93226113753595907" green="1" blue="0.86569253606611263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Fd8-3e-e8s"/>
+                                    <constraint firstAttribute="height" constant="128" id="OX6-AJ-L6r"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGO-PV-eND">
+                                <rect key="frame" x="142" y="388" width="91" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="StopVideoGif"/>
+                                <connections>
+                                    <action selector="stopAudioGif:" destination="mZV-3c-877" eventType="touchUpInside" id="naJ-Ia-1ne"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="leading" secondItem="tDF-5l-wX9" secondAttribute="leading" constant="20" id="10c-i7-NAj"/>
+                            <constraint firstItem="Y1m-iv-zeX" firstAttribute="leading" secondItem="tDF-5l-wX9" secondAttribute="leading" id="Q3n-a6-I7X"/>
+                            <constraint firstItem="tDF-5l-wX9" firstAttribute="trailing" secondItem="aJ9-wk-9Ev" secondAttribute="trailing" constant="20" id="hMB-cP-X3o"/>
+                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="i2y-SP-PW4"/>
+                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="centerY" secondItem="Cw1-H1-9h6" secondAttribute="centerY" id="jJE-Lc-kvG"/>
+                            <constraint firstItem="1Bm-Ja-Mfg" firstAttribute="leading" secondItem="tDF-5l-wX9" secondAttribute="leading" constant="67" id="tBo-V0-0d6"/>
+                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="top" secondItem="1Bm-Ja-Mfg" secondAttribute="bottom" constant="70.5" id="tGg-Sy-a4h"/>
+                            <constraint firstItem="Y1m-iv-zeX" firstAttribute="top" secondItem="tDF-5l-wX9" secondAttribute="top" id="wpS-a0-kcS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tDF-5l-wX9"/>
                     </view>
+                    <connections>
+                        <outlet property="videogif" destination="1Bm-Ja-Mfg" id="Wed-4g-xTK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAG-tT-hkU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927" y="34"/>
+            <point key="canvasLocation" x="925.60000000000002" y="33.733133433283363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xff-xB-4JP">

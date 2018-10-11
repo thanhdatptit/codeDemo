@@ -24,7 +24,7 @@ class EmojViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        eMojCollection.allowsMultipleSelection = true
+        eMojCollection.allowsMultipleSelection = false
         fetchEmojis()
         eMojCollection.register(UINib(nibName: "CellEmojCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "CellEmojCollectionViewCell")
         eMojCollection.delegate = self

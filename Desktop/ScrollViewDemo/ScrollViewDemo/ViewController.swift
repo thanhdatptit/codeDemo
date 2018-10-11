@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     var views:[UIView]!
-    // test git
-
     var arrMenuSelect = [UIButton]()
+    var arrimageView = [UIImage]()
+
     fileprivate var numberWidthMenuSelect = 0
     fileprivate var numberheighMenuSelect = 52
 
@@ -44,6 +44,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         cusTomView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        arrimageView.removeAll()
+    }
+
     func addButton12() {
         for i in 0...4 {
             numberWidthMenuSelect = Int(scrollMenuBot.frame.size.width / 5)
@@ -70,6 +75,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
 
     @objc func clickItem12(sender:UIButton) {
+        for i in 0..<views.count {
+            if i == sender.tag {
+                views[i].isHidden = false
+            } else {
+                views[i].isHidden = true
+            }
+        }
         self.viewMenuBottom.bringSubview(toFront: views[sender.tag])
      //   self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
     }
@@ -200,11 +212,28 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     // MARK: Click add more button
 
-    var arrimageView = [UIImage]()
+
 
     @IBAction func upLoadingGifVideo(_ sender: Any) {
-        
+        let numberCountArrXib = arrXib.count
+        for i in 0..<numberCountArrXib {
+            guard let imageXib = image(with: arrXib[i]) else { return }
+            arrimageView.append(imageXib)
+        }
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "GifAndCameraViewController") as? GifAndCameraViewController  else { return }
+        vc.arrimageVideo = arrimageView
+        navigationController?.present(vc, animated: true, completion: nil)
+    }
 
+    func image(with view: UIView) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        if let context = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            return image
+        }
+        return nil
     }
 
     @IBAction func removeGifVideo(_ sender: Any) {
@@ -233,7 +262,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     // MARK: Click scrollview number item
     @objc func clickItem(sender:UIButton) {
-        
+        isCanUpdateNumberOffset = false
         print("clicked item number")
         let selectedIdx = sender.tag
         currentItemIdx = selectedIdx
@@ -304,8 +333,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     func addImagView() {
         
         let numberXib = arrXib.count
-        var originX:CGFloat = 5
-        let originY:CGFloat = 5
+        var originX:CGFloat = 0
+        let originY:CGFloat = 0
         
         for _ in 0..<numberXib {
             originX += numberFrameXibWidth
