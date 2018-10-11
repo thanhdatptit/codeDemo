@@ -202,10 +202,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     var arrimageView = [UIImage]()
 
     @IBAction func upLoadingGifVideo(_ sender: Any) {
-//        for temp in scrollViewMain {
-//            if temp is (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground {
-//                arrimageView.append(&temp)
-//            }
+        
 
     }
 
