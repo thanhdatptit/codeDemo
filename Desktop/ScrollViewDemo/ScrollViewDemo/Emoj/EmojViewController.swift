@@ -22,6 +22,7 @@ class EmojViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    //jkahsdjkhas
 
     override func viewDidAppear(_ animated: Bool) {
         eMojCollection.allowsMultipleSelection = false
