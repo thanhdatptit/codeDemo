@@ -14,13 +14,15 @@ import AVKit
 class GifAndCameraViewController: UIViewController {
      var urlString = ""
 
+    @IBOutlet weak var viewPresent: UIView!
+    @IBOutlet weak var lblTut: UILabel!
     let outputSize = CGSize(width: 1920, height: 1280)
     let imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
     var selectedPhotosArray = [UIImage]()
     var imageArrayToVideoURL = NSURL()
     let audioIsEnabled: Bool = false //if your video has no sound
     var asset: AVAsset!
-
+    var videoPlayerVc : AVPlayerViewController!
     @IBOutlet weak var videogif: UIImageView!
 
     var arrimageVideo:[UIImage] = []
@@ -29,13 +31,23 @@ class GifAndCameraViewController: UIViewController {
         super.viewDidLoad()
         videogif.animationImages = arrimageVideo
         videogif.animationDuration = 5
+        self.title = "Gif & Video"
     }
     
     @IBAction func disMiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 
+    // MARK: CREATE GIF
+    
     @IBAction func audioGif(_ sender: Any) {
+         lblTut.isHidden = true
+        if videoPlayerVc != nil {
+          videoPlayerVc.view.isHidden = true
+        }
+   
+         videogif.isHidden = false
+        
          videogif.startAnimating()
     }
     @IBAction func stopAudioGif(_ sender: Any) {
@@ -60,35 +72,49 @@ class GifAndCameraViewController: UIViewController {
 //        }
     }
 
+      // MARK: PLAY VIDEO
     //Edited By Manh Nguyen
     func playVideoWithUrl(strUrl : String) {
         
-        let videoPlayer = AVPlayerViewController()
-        //        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        lblTut.isHidden = true
+         let playerItem = AVPlayerItem(url: URL.init(string: strUrl)!)
+        if (videoPlayerVc == nil) {
+           videoPlayerVc = AVPlayerViewController()
+            //        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            
+           
+            let  player = AVPlayer(playerItem: playerItem)
+            
+            //play using layer
+            //        videoPlayer.player = player
+            //        let playerLayer = AVPlayerLayer(player: player)
+            //        playerLayer.frame = self.videogif.frame
+            //        self.view.layer.addSublayer(playerLayer)
+            //
+            //        player.play()
+            
+            
+            
+            //add controller as child
+            videoPlayerVc.player = player
+           
+            self.addChildViewController(videoPlayerVc)
+            self.view.addSubview(videoPlayerVc.view)
+            videoPlayerVc.view.frame = self.viewPresent.frame
+           
+        }else{
+            videoPlayerVc.player?.replaceCurrentItem(with: playerItem)
+            
+        }
+        videogif.isHidden = true
+        videoPlayerVc.view.isHidden = false
+        videoPlayerVc.player?.play()
         
-        let playerItem = AVPlayerItem(url: URL.init(string: strUrl)!)
-        let  player = AVPlayer(playerItem: playerItem)
-        
-        //play using layer
-        //        videoPlayer.player = player
-        //        let playerLayer = AVPlayerLayer(player: player)
-        //        playerLayer.frame = self.videogif.frame
-        //        self.view.layer.addSublayer(playerLayer)
-        //
-        //        player.play()
-        
-        
-        
-        //add controller as child
-        videoPlayer.player = player
-        self.addChildViewController(videoPlayer)
-        self.view.addSubview(videoPlayer.view)
-        videoPlayer.view.frame = self.videogif.frame
-        player.play()
     }
 
     @IBAction func audioVideo(_ sender: Any) {
         buildVideoFromImageArray()
+     
     }
 
     func buildVideoFromImageArray() {

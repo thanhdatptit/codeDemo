@@ -210,7 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         txFShowText.becomeFirstResponder()
         txfInput.becomeFirstResponder()
     }
-    // MARK: Click add more button
+   
 
 
 
@@ -221,8 +221,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             arrimageView.append(imageXib)
         }
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "GifAndCameraViewController") as? GifAndCameraViewController  else { return }
+        let nav:UINavigationController = UINavigationController(rootViewController: vc)
+        
         vc.arrimageVideo = arrimageView
-        navigationController?.present(vc, animated: true, completion: nil)
+        navigationController?.present(nav, animated: true, completion: nil)
     }
 
     func image(with view: UIView) -> UIImage? {
@@ -239,7 +241,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     @IBAction func removeGifVideo(_ sender: Any) {
 
     }
-
+    
+ // MARK: Click add more button
     @IBAction func clickButton(_ sender: UIButton) {
         addButton()
         addImagView()
