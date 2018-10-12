@@ -49,6 +49,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         arrimageView.removeAll()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+       arrMenuSelect[2].sendActions(for: .touchUpInside)
+    }
+
     func addButton12() {
         for i in 0...4 {
             numberWidthMenuSelect = Int(scrollMenuBot.frame.size.width / 5)
@@ -61,7 +65,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             }
 
             let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidthMenuSelect, height: numberheighMenuSelect))
-            button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
+            button.setTitleColor(#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), for: .normal)
             scrollMenuBot.addSubview(button)
             arrMenuSelect.append(button)
             scrollMenuBot.contentSize.width = CGFloat(originX + numberWidthMenuSelect)
@@ -78,8 +83,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         for i in 0..<views.count {
             if i == sender.tag {
                 views[i].isHidden = false
+                sender.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+                sender.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
             } else {
                 views[i].isHidden = true
+                arrMenuSelect[i].backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
+                arrMenuSelect[i].setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
             }
         }
         self.viewMenuBottom.bringSubview(toFront: views[sender.tag])
@@ -109,7 +118,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         scrollViewNumber.showsHorizontalScrollIndicator = false
         scrollViewMain.showsVerticalScrollIndicator = false
         scrollViewMain.showsHorizontalScrollIndicator = false
-        scrollViewNumber.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.3)
+       // scrollViewNumber.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.3)
         addButton()
         addImagView()
         scrollViewMain.delegate = self
@@ -192,7 +201,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         button.addTarget(self, action: #selector(clickItem), for: .touchUpInside)
         button.tag = arrNumbers.count - 1
     }
-    
+
     // MARK: Tap Scrollview main
     
     @objc func tappedScrollViewMain(_ tap : UITapGestureRecognizer) {
@@ -253,7 +262,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         let btnButtonNumber:UIButton = arrNumbers[arrNumbers.count - 1]
         for but in arrNumbers {
             if but != btnButtonNumber {
-                but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                but.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 0.8)
             } else {
                 btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
             }
@@ -318,7 +327,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         let btnButtonNumber:UIButton = arrNumbers[selectedIdx]
         for but in arrNumbers {
             if but != btnButtonNumber {
-                but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                but.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 0.8)
             } else {
                 btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
             }
@@ -343,6 +352,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         guard let customView = Bundle.main.loadNibNamed("ItemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
         customView.frame = CGRect(x: originX, y: originY, width: numberFrameXibWidth, height: numberFrameXibheigh)
         customView.lblBackground.text = ""
+        customView.layer.cornerRadius = 20
+        customView.clipsToBounds = true
         scrollViewMain.contentSize.width = originX + numberFrameXibWidth
         scrollViewMain.isPagingEnabled = true
         print("X \(originX)")
@@ -390,7 +401,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             
             for but in arrNumbers {
                 if but != btnButtonNumber {
-                    but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                    but.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 0.7992562072)
                 } else {
                     btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
                 }

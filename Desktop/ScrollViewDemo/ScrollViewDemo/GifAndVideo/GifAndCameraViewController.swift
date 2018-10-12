@@ -14,6 +14,8 @@ import AVKit
 class GifAndCameraViewController: UIViewController {
      var urlString = ""
 
+
+
     let outputSize = CGSize(width: 1920, height: 1280)
     let imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
     var selectedPhotosArray = [UIImage]()
@@ -21,6 +23,7 @@ class GifAndCameraViewController: UIViewController {
     let audioIsEnabled: Bool = false //if your video has no sound
     var asset: AVAsset!
 
+    @IBOutlet weak var slideSpeedValue: UISlider!
     @IBOutlet weak var videogif: UIImageView!
 
     var arrimageVideo:[UIImage] = []
@@ -29,6 +32,7 @@ class GifAndCameraViewController: UIViewController {
         super.viewDidLoad()
         videogif.animationImages = arrimageVideo
         videogif.animationDuration = 5
+        slideSpeedValue.minimumTrackTintColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
     }
     
     @IBAction func disMiss(_ sender: Any) {
@@ -38,9 +42,38 @@ class GifAndCameraViewController: UIViewController {
     @IBAction func audioGif(_ sender: Any) {
          videogif.startAnimating()
     }
-    @IBAction func stopAudioGif(_ sender: Any) {
-        videogif.stopAnimating()
+
+    @IBAction func shareToView(_ sender: Any) {
+
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [videogif], applicationActivities: nil)
+
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
+
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            UIActivityType.postToWeibo,
+            UIActivityType.print,
+            UIActivityType.assignToContact,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.addToReadingList,
+            UIActivityType.postToFlickr,
+            UIActivityType.postToVimeo,
+            UIActivityType.postToTencentWeibo
+        ]
+
+        self.present(activityViewController, animated: true, completion: nil)
     }
+
+    @IBAction func slideSpeed(_ sender: UISlider) {
+        print(sender.value)
+    }
+
 
     @IBAction func playvideo(_ sender: Any) {
         print(urlString)
