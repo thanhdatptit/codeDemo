@@ -44,16 +44,48 @@ class GifAndCameraViewController: UIViewController {
 
     @IBAction func playvideo(_ sender: Any) {
         print(urlString)
-        if let path = Bundle.main.path(forResource: urlString, ofType: "mp4") {
-            let video = AVPlayer(url: URL(fileURLWithPath: path))
-            let videoPlayer = AVPlayerViewController()
-            videoPlayer.player = video
-            present(videoPlayer, animated: true) {
-                video.play()
-            }
-        }
+        
+//        present(videoPlayer, animated: true) {
+//
+//                player.play()
+//                        }
+    
+//        if let path = Bundle.main.path(forResource: urlString, ofType: "mp4") {
+//            let video = AVPlayer(url: URL(fileURLWithPath: path))
+//
+//            videoPlayer.player = player
+//            present(videoPlayer, animated: true) {
+//                video.play()
+//            }
+//        }
     }
 
+    //Edited By Manh Nguyen
+    func playVideoWithUrl(strUrl : String) {
+        
+        let videoPlayer = AVPlayerViewController()
+        //        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        
+        let playerItem = AVPlayerItem(url: URL.init(string: strUrl)!)
+        let  player = AVPlayer(playerItem: playerItem)
+        
+        //play using layer
+        //        videoPlayer.player = player
+        //        let playerLayer = AVPlayerLayer(player: player)
+        //        playerLayer.frame = self.videogif.frame
+        //        self.view.layer.addSublayer(playerLayer)
+        //
+        //        player.play()
+        
+        
+        
+        //add controller as child
+        videoPlayer.player = player
+        self.addChildViewController(videoPlayer)
+        self.view.addSubview(videoPlayer.view)
+        videoPlayer.view.frame = self.videogif.frame
+        player.play()
+    }
 
     @IBAction func audioVideo(_ sender: Any) {
         buildVideoFromImageArray()
@@ -127,9 +159,13 @@ class GifAndCameraViewController: UIViewController {
                 videoWriter.finishWriting { () -> Void in
                     print("-----video1 url = \(self.imageArrayToVideoURL)")
                     self.urlString = "\(self.imageArrayToVideoURL)"
-
                     self.asset = AVAsset(url: self.imageArrayToVideoURL as URL)
                     self.exportVideoWithAnimation()
+                    DispatchQueue.main.async {
+                        //code that caused error goes here
+                         self.playVideoWithUrl(strUrl: self.urlString)
+                    }
+                   
                 }
             })
         }
