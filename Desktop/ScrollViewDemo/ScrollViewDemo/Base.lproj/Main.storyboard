@@ -171,6 +171,14 @@
                                     <action selector="stopAudioGif:" destination="mZV-3c-877" eventType="touchUpInside" id="naJ-Ia-1ne"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYK-MI-uOT">
+                                <rect key="frame" x="148" y="450" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Playvideo"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="mZV-3c-877" eventType="touchUpInside" id="Mz3-h5-Dgi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
