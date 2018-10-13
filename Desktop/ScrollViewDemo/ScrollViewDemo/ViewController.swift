@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     var views:[UIView]!
     var arrMenuSelect = [UIButton]()
     var arrimageView = [UIImage]()
+    var arrListConten = [ItemScrollView]()
+    var checkEmoj = 0
 
     fileprivate var numberWidthMenuSelect = 0
     fileprivate var numberheighMenuSelect = 52
@@ -48,6 +50,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         super.viewWillAppear(animated)
         arrimageView.removeAll()
         arrMenuSelect[2].sendActions(for: .touchUpInside)
+        navigationController?.isNavigationBarHidden = false
     }
 
     func addButton12() {
@@ -118,7 +121,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         scrollViewNumber.showsHorizontalScrollIndicator = false
         scrollViewMain.showsVerticalScrollIndicator = false
         scrollViewMain.showsHorizontalScrollIndicator = false
-        scrollViewNumber.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.3)
+      //  scrollViewNumber.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.3)
         addButton()
         addImagView()
         scrollViewMain.delegate = self
@@ -253,6 +256,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
  // MARK: Click add more button
     @IBAction func clickButton(_ sender: UIButton) {
+        checkEmoj = 0
         addButton()
         addImagView()
         isCanUpdateNumberOffset = false
@@ -273,10 +277,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     // MARK: Click scrollview number item
+    var numberClickScroll = 0
     @objc func clickItem(sender:UIButton) {
+        checkEmoj = 1
         isCanUpdateNumberOffset = false
         print("clicked item number")
         let selectedIdx = sender.tag
+       numberClickScroll =  sender.tag
         currentItemIdx = selectedIdx
         let widthScroll:CGFloat =  CGFloat(selectedIdx)  * numberFrameXibWidth
 
@@ -362,6 +369,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         print("X \(originX)")
             customView.backgroundColor = UIColor.random()
         scrollViewMain.addSubview(customView)
+        arrListConten.append(customView)
         print("abc \(arrXib.count)")
         arrXib.append(customView)
         if self.scrollViewMain.contentSize.width > self.scrollViewMain.bounds.size.width {
@@ -435,7 +443,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-       let test = 0
         if textField.tag == 10{
             let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
             if  (currentItem.lblBackground.text?.isEmpty)!{
@@ -480,33 +487,57 @@ extension UIColor {
 extension ViewController:EmojViewControllerDelegate {
     
     func emojView(_ viewcontroller: EmojViewController, didSelect emoji: String) {
-        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text = ((scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.text)!  + emoji
-        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblTut.isHidden = true
-
+        if checkEmoj == 0 {
+            arrListConten[temp1].lblBackground.text = arrListConten[temp1].lblBackground.text! + emoji
+            arrListConten[temp1].lblTut.isHidden = true
+        } else {
+            arrListConten[numberClickScroll].lblBackground.text = arrListConten[numberClickScroll].lblBackground.text! + emoji
+            arrListConten[numberClickScroll].lblTut.isHidden = true
+        }
     }
 }
 
 extension ViewController:ImageCameraViewControllerDelegate {
     func imageCameraView(_ viewcontroller: ImageCameraViewController, selectImage image: UIImage) {
-   (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground.image = image
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground.image = image
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.imagBackground.image = image
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        }
     }
 }
 
 extension ViewController: ColorTextViewControllerDelegate {
     func colorTextView(_ viewcontroller: ColorTextViewController, didSelect textColor: UIColor) {
+
+        if checkEmoj == 0 {
         (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.textColor = textColor
+        } else {
+        (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.textColor = textColor
+        }
     }
 }
 //vl
 extension ViewController: ColorBackgroungViewControllerDelegate {
     func colorBackgroungView(_ viewcontroller: ColorBackgroungViewController, didselectBackground colorBackground: UIColor) {
-        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+        }
     }
 }
 
 extension ViewController: TextImageViewControllerDelegate {
     func textImageView(_ viewcontroller: TextImageViewController, didSelectfont fontText: String) {
-        (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = UIFont(name: fontText, size: 35)
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = UIFont(name: fontText, size: 35)
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.font = UIFont(name: fontText, size: 35)
+        }
+
     }
 
 

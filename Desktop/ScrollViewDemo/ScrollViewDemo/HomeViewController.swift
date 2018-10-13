@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var constrainSquare: NSLayoutConstraint!
     @IBOutlet weak var constrainPortrait: NSLayoutConstraint!
     @IBOutlet weak var btnLandScape: UIButton!
+    @IBOutlet weak var constrainChooseTop: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +24,23 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         animationHome()
         cusTomView()
+        navigationController?.isNavigationBarHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             self.constrainLeft.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 2, options: .curveEaseOut, animations: {
             self.constrainSquare.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 2, options: .curveEaseOut, animations: {
             self.constrainPortrait.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+            self.constrainChooseTop.constant += self.view.bounds.height
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -56,6 +62,7 @@ extension HomeViewController {
         constrainLeft.constant -= view.bounds.width
         constrainSquare.constant -= view.bounds.width
         constrainPortrait.constant -= view.bounds.width
+        constrainChooseTop.constant -= view.bounds.height
     }
 }
 

@@ -33,6 +33,13 @@ class GifAndCameraViewController: UIViewController {
         videogif.animationDuration = 5
         self.title = "Gif & Video"
     }
+
+    @IBAction func sliderSpeed(_ sender: UISlider) {
+         let playerItem = AVPlayerItem(url: imageArrayToVideoURL as URL)
+        let player = AVPlayer(playerItem: playerItem)
+            player.rate = sender.value
+    }
+
     
     @IBAction func disMiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
