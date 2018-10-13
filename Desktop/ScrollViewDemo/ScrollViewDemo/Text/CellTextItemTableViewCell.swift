@@ -12,6 +12,10 @@ class CellTextItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblShowNameText: UILabel!
 
+    @IBAction func decreaseFontSizeAc(_ sender: Any) {
+    }
+    @IBAction func increaseFonSizeAc(_ sender: UIButton) {
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -57,7 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2501AEE8216997CA007A6018 /* ScrollViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2501AEE8216997CA007A6018 /* Text To Gif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Text To Gif.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2501AEEB216997CA007A6018 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2501AEED216997CA007A6018 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2501AEF0216997CA007A6018 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		2501AEE9216997CA007A6018 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2501AEE8216997CA007A6018 /* ScrollViewDemo.app */,
+				2501AEE8216997CA007A6018 /* Text To Gif.app */,
 				2501AEFC216997CB007A6018 /* ScrollViewDemoTests.xctest */,
 				2501AF07216997CB007A6018 /* ScrollViewDemoUITests.xctest */,
 			);
@@ -277,7 +277,7 @@
 			);
 			name = ScrollViewDemo;
 			productName = ScrollViewDemo;
-			productReference = 2501AEE8216997CA007A6018 /* ScrollViewDemo.app */;
+			productReference = 2501AEE8216997CA007A6018 /* Text To Gif.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2501AEFB216997CB007A6018 /* ScrollViewDemoTests */ = {
@@ -596,7 +596,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nguyenmanh.swiftchat.ScrollViewDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Text To Gif";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -614,7 +614,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nguyenmanh.swiftchat.ScrollViewDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Text To Gif";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

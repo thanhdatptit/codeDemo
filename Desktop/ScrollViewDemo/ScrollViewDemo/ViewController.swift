@@ -62,8 +62,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             }
 
             let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidthMenuSelect, height: numberheighMenuSelect))
-            button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+            button.backgroundColor = Constant.SELECTED_COLOR
             button.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
+            
             button.setTitleColor(#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), for: .normal)
             scrollMenuBot.addSubview(button)
             arrMenuSelect.append(button)
@@ -82,7 +83,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             if i == sender.tag {
                 views[i].isHidden = false
                 sender.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-                sender.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+                sender.setTitleColor(Constant.SELECTED_COLOR, for: .normal)
 
             } else {
                 views[i].isHidden = true
@@ -189,7 +190,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         }
         
         let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidth, height: numberheigh))
-        button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+        button.backgroundColor = Constant.SELECTED_COLOR
         button.layer.cornerRadius = 5
         scrollViewNumber.addSubview(button)
         arrNumbers.append(button)
@@ -267,7 +268,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             if but != btnButtonNumber {
                 but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             } else {
-                btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+                btnButtonNumber.backgroundColor = Constant.SELECTED_COLOR
             }
         }
     }
@@ -332,7 +333,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             if but != btnButtonNumber {
                 but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             } else {
-                btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+                btnButtonNumber.backgroundColor = Constant.SELECTED_COLOR
             }
         }
 //            let bottomOffset12 = CGPoint(x: selectedIdx * numberWidth , y: 0)
@@ -406,7 +407,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
                 if but != btnButtonNumber {
                     but.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
                 } else {
-                    btnButtonNumber.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+                    btnButtonNumber.backgroundColor = Constant.SELECTED_COLOR
                 }
             }
         }
@@ -459,6 +460,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 //        let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
 //        currentItem.lblBackground.text = textField.text! + string;
 //        return true
+//    }
+    
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            let position = touch.location(in: self.view)
+//            print(position.x)
+//            print(position.y)
+//             let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+//            currentItem.lblBackground.frame.origin = CGPoint(x:position.x-60,y:position.y-50)
+//        }
 //    }
 }
 
