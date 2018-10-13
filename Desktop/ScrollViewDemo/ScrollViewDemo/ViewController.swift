@@ -54,19 +54,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         for i in 0...4 {
             numberWidthMenuSelect = Int(scrollMenuBot.frame.size.width / 5)
             let number = arrMenuSelect.count
-            let originY = 0
+            let originY = scrollMenuBot.frame.height / 2 - 52/2
             var originX = 0
 
             for _ in 0..<number {
                 originX +=  numberWidthMenuSelect
             }
-
-            let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidthMenuSelect, height: numberheighMenuSelect))
+            
+            let button:UIButton = UIButton(frame: CGRect(x: originX, y:Int(originY), width: numberWidthMenuSelect, height: numberheighMenuSelect))
             button.backgroundColor = Constant.SELECTED_COLOR
             button.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
-            
             button.setTitleColor(#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), for: .normal)
             scrollMenuBot.addSubview(button)
+            
             arrMenuSelect.append(button)
             scrollMenuBot.contentSize.width = CGFloat(originX + numberWidthMenuSelect)
             //scrollView.isPagingEnabled = true

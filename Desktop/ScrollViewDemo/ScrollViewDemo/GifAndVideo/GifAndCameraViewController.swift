@@ -14,11 +14,13 @@ import AVKit
 class GifAndCameraViewController: UIViewController {
      var urlString = ""
 
+    @IBOutlet weak var lblShowValueSlider: UILabel!
     @IBOutlet weak var viewPresent: UIView!
     @IBOutlet weak var lblTut: UILabel!
     let outputSize = CGSize(width: 1920, height: 1280)
-    let imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
+    var imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
     var selectedPhotosArray = [UIImage]()
+    var timerVideoGif = 0
     var imageArrayToVideoURL = NSURL()
     let audioIsEnabled: Bool = false //if your video has no sound
     var asset: AVAsset!
@@ -37,7 +39,12 @@ class GifAndCameraViewController: UIViewController {
     @IBAction func disMiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    @IBAction func slideSpeed(_ sender: UISlider) {
+        imagesPerSecond = TimeInterval(10.2 - sender.value)
+        timerVideoGif = Int(sender.value)
+        lblShowValueSlider.text = "\(sender.value)"
+    }
+    
     // MARK: CREATE GIF
     
     @IBAction func audioGif(_ sender: Any) {
@@ -47,7 +54,7 @@ class GifAndCameraViewController: UIViewController {
         }
    
          videogif.isHidden = false
-        
+        videogif.layer.speed = Float(2)
          videogif.startAnimating()
     }
     @IBAction func stopAudioGif(_ sender: Any) {
@@ -136,15 +143,18 @@ class GifAndCameraViewController: UIViewController {
             videoWriter.add(videoWriterInput)
         }
         if videoWriter.startWriting() {
-            let zeroTime = CMTimeMake(Int64(imagesPerSecond),Int32(1))
+            let timeMake = imagesPerSecond * 10000
+            let zeroTime = CMTimeMake(Int64(timeMake), 10000)
+//            let zeroTime = CMTimeMake(Int64(imagesPerSecond),Int32(1))
             videoWriter.startSession(atSourceTime: zeroTime)
 
             assert(pixelBufferAdaptor.pixelBufferPool != nil)
             let media_queue = DispatchQueue(label: "mediaInputQueue")
             videoWriterInput.requestMediaDataWhenReady(on: media_queue, using: { () -> Void in
-                let fps: Int32 = 1
-                let framePerSecond: Int64 = Int64(self.imagesPerSecond)
-                let frameDuration = CMTimeMake(Int64(self.imagesPerSecond), fps)
+                let fps: Int32 = 10000
+                
+                let framePerSecond: Int64 = Int64(self.imagesPerSecond * 10000)
+                let frameDuration = CMTimeMake(Int64(self.imagesPerSecond * 10000), fps)
                 var frameCount: Int64 = 0
                 var appendSucceeded = true
                 while (!self.selectedPhotosArray.isEmpty) {
