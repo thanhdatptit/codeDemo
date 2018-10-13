@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03N-yM-c3f">
-                                <rect key="frame" x="0.0" y="74" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="48"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-gE-vdh">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
@@ -41,7 +41,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="0.42617722602739733" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Wwz-gE-vdh" firstAttribute="leading" secondItem="03N-yM-c3f" secondAttribute="leading" id="0Qp-7j-NDI"/>
                                     <constraint firstItem="Wwz-gE-vdh" firstAttribute="top" secondItem="03N-yM-c3f" secondAttribute="top" id="0aR-2l-LH1"/>
@@ -54,7 +54,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pze-b8-M1l">
-                                <rect key="frame" x="67.5" y="172" width="240" height="214"/>
+                                <rect key="frame" x="67.5" y="162" width="240" height="214"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pze-b8-M1l" secondAttribute="height" multiplier="120:107" id="6QG-Dg-T5k"/>
                                     <constraint firstAttribute="height" constant="214" id="N8U-5b-qse"/>
@@ -81,7 +81,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="03N-yM-c3f" secondAttribute="trailing" id="1Gu-dK-y69"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="3U3-0W-FKC" secondAttribute="trailing" id="2Oa-uB-Fab"/>
@@ -89,7 +89,7 @@
                             <constraint firstItem="3U3-0W-FKC" firstAttribute="top" secondItem="Z0U-hk-i2B" secondAttribute="bottom" id="8Oh-JR-x0h"/>
                             <constraint firstItem="3U3-0W-FKC" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" id="DBf-nl-7X2"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="Gip-RR-Jrr" secondAttribute="trailing" constant="20" id="Ecq-7L-T3o"/>
-                            <constraint firstItem="03N-yM-c3f" firstAttribute="top" secondItem="40f-Zh-K3F" secondAttribute="top" constant="10" id="FV0-Qa-2Eh"/>
+                            <constraint firstItem="03N-yM-c3f" firstAttribute="top" secondItem="40f-Zh-K3F" secondAttribute="top" id="FV0-Qa-2Eh"/>
                             <constraint firstItem="3U3-0W-FKC" firstAttribute="height" secondItem="ggq-XS-eWy" secondAttribute="height" multiplier="1/3.5" id="FeP-o1-UbB"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="Z0U-hk-i2B" secondAttribute="trailing" id="SSC-SE-yVq"/>
                             <constraint firstItem="pze-b8-M1l" firstAttribute="top" secondItem="03N-yM-c3f" secondAttribute="bottom" constant="50" id="Tve-6l-BnZ"/>
@@ -127,7 +127,7 @@
             </objects>
             <point key="canvasLocation" x="1164" y="31.934032983508249"/>
         </scene>
-        <!--Home View Controller-->
+        <!-- -->
         <scene sceneID="b9z-FE-hWQ">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="VfC-xN-vr6" customClass="HomeViewController" customModule="ScrollViewDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -151,7 +151,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="choose an aspect radio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-wM-AwJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an aspect radio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-wM-AwJ">
                                         <rect key="frame" x="20" y="177.5" width="241" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Ecc-ii-Nyd"/>
@@ -230,7 +230,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Ig-9H-X41"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Enq-63-5io"/>
+                    <navigationItem key="navigationItem" title=" " id="Enq-63-5io">
+                        <barButtonItem key="backBarButtonItem" title=" " id="rN7-kx-9hU"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnLandScape" destination="0bu-l6-gIU" id="FuX-ix-DlW"/>
                         <outlet property="btnPortrait" destination="tYF-NG-Awo" id="NQA-Sc-8Pi"/>
@@ -400,7 +402,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAG-tT-hkU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3972" y="90.404797601199405"/>
+            <point key="canvasLocation" x="3935" y="32"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uqp-L3-ciy">

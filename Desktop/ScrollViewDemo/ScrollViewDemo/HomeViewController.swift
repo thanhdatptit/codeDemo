@@ -31,18 +31,18 @@ class HomeViewController: UIViewController {
             self.constrainLeft.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 2, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             self.constrainSquare.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 2, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             self.constrainPortrait.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
-            self.constrainChooseTop.constant += self.view.bounds.height
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+//        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+//            self.constrainChooseTop.constant += self.view.bounds.height
+//            self.view.layoutIfNeeded()
+//        }, completion: nil)
     }
     @IBAction func naviSquare(_ sender: Any) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController else { return }
@@ -62,7 +62,7 @@ extension HomeViewController {
         constrainLeft.constant -= view.bounds.width
         constrainSquare.constant -= view.bounds.width
         constrainPortrait.constant -= view.bounds.width
-        constrainChooseTop.constant -= view.bounds.height
+        //constrainChooseTop.constant -= view.bounds.height
     }
 }
 

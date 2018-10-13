@@ -23,6 +23,12 @@ class ImageCameraViewController: UIViewController, UIImagePickerControllerDelega
         imagePickerController.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cameraImage.layer.cornerRadius = 7
+        libraryImage.layer.cornerRadius = 7
+    }
+
     @IBAction func camera(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePickerController.sourceType = .camera
