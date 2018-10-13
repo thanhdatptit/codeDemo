@@ -35,6 +35,7 @@
 		2F5910E9216B8A2D008B7B85 /* CellColorBackgroundCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5910E7216B8A2D008B7B85 /* CellColorBackgroundCollectionViewCell.xib */; };
 		2F5910EC216B90F4008B7B85 /* TextColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5910EA216B90F4008B7B85 /* TextColorCollectionViewCell.swift */; };
 		2F5910ED216B90F4008B7B85 /* TextColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5910EB216B90F4008B7B85 /* TextColorCollectionViewCell.xib */; };
+		2F608EFF2170F19C00C48961 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F608EFE2170F19C00C48961 /* HomeViewController.swift */; };
 		2F8E5904216F232300FB8E7B /* GifAndCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8E5903216F232300FB8E7B /* GifAndCameraViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		2F5910E7216B8A2D008B7B85 /* CellColorBackgroundCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellColorBackgroundCollectionViewCell.xib; sourceTree = "<group>"; };
 		2F5910EA216B90F4008B7B85 /* TextColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F5910EB216B90F4008B7B85 /* TextColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextColorCollectionViewCell.xib; sourceTree = "<group>"; };
+		2F608EFE2170F19C00C48961 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2F8E5900216F116800FB8E7B /* SwiftVideoGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftVideoGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F8E5903216F232300FB8E7B /* GifAndCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifAndCameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 				2501AEF7216997CB007A6018 /* Info.plist */,
 				25DCFB242169E96B0009F361 /* ItemScrollView.swift */,
 				25DCFB262169ED0C0009F361 /* ItemScrollView.xib */,
+				2F608EFE2170F19C00C48961 /* HomeViewController.swift */,
 			);
 			path = ScrollViewDemo;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				2F8E5904216F232300FB8E7B /* GifAndCameraViewController.swift in Sources */,
 				2F5910D4216B7C00008B7B85 /* ColorBackgroungViewController.swift in Sources */,
 				25DCFB252169E96B0009F361 /* ItemScrollView.swift in Sources */,
+				2F608EFF2170F19C00C48961 /* HomeViewController.swift in Sources */,
 				2F5910E4216B84F1008B7B85 /* CellEmojCollectionViewCell.swift in Sources */,
 				2F5910C7216B7B6F008B7B85 /* EmojViewController.swift in Sources */,
 				2501AEEE216997CA007A6018 /* ViewController.swift in Sources */,

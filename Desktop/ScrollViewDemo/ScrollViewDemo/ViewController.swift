@@ -47,6 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         arrimageView.removeAll()
+        arrMenuSelect[2].sendActions(for: .touchUpInside)
     }
 
     func addButton12() {
@@ -62,6 +63,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 
             let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidthMenuSelect, height: numberheighMenuSelect))
             button.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
+            button.setTitleColor(#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), for: .normal)
             scrollMenuBot.addSubview(button)
             arrMenuSelect.append(button)
             scrollMenuBot.contentSize.width = CGFloat(originX + numberWidthMenuSelect)
@@ -78,8 +81,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         for i in 0..<views.count {
             if i == sender.tag {
                 views[i].isHidden = false
+                sender.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+                sender.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+
             } else {
                 views[i].isHidden = true
+                arrMenuSelect[i].backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.8196078431, blue: 0.6823529412, alpha: 1)
+                arrMenuSelect[i].setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+
             }
         }
         self.viewMenuBottom.bringSubview(toFront: views[sender.tag])
@@ -346,6 +355,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         guard let customView = Bundle.main.loadNibNamed("ItemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
         customView.frame = CGRect(x: originX, y: originY, width: numberFrameXibWidth, height: numberFrameXibheigh)
         customView.lblBackground.text = ""
+        customView.layer.cornerRadius = 20
+        customView.clipsToBounds = true
         scrollViewMain.contentSize.width = originX + numberFrameXibWidth
         scrollViewMain.isPagingEnabled = true
         print("X \(originX)")
