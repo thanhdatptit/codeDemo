@@ -9,21 +9,33 @@
 import UIKit
 import AVFoundation
 import AVKit
-
+import Photos
 
 class GifAndCameraViewController: UIViewController {
      var urlString = ""
 
+    @IBOutlet weak var sliderSetValue: UISlider!
     @IBOutlet weak var lblShowValueSlider: UILabel!
     @IBOutlet weak var viewPresent: UIView!
     @IBOutlet weak var lblTut: UILabel!
+    @IBOutlet weak var stackViewHidden: UIStackView!
+    @IBOutlet weak var constrainViewGifandVideo: NSLayoutConstraint!
+    @IBOutlet weak var stackTimeSpeedHidden: UIStackView!
+    @IBOutlet weak var constrainSpeed: NSLayoutConstraint!
+    @IBOutlet weak var btnReset: UIButton!
+    @IBOutlet weak var constrainReset: NSLayoutConstraint!
+    @IBOutlet weak var constrainTopSpeed: NSLayoutConstraint!
+    @IBOutlet weak var constrainBottomSpeed: NSLayoutConstraint!
+
+
     let outputSize = CGSize(width: 1920, height: 1280)
     var imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
     var selectedPhotosArray = [UIImage]()
-    var timerVideoGif = 0
+    var timerVideoGif = 3
     var imageArrayToVideoURL = NSURL()
     let audioIsEnabled: Bool = false //if your video has no sound
     var asset: AVAsset!
+
     var videoPlayerVc : AVPlayerViewController!
     @IBOutlet weak var videogif: UIImageView!
 
@@ -31,16 +43,18 @@ class GifAndCameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        videogif.animationImages = arrimageVideo
-        videogif.animationDuration = 5
         self.title = "Gif & Video"
+        lblShowValueSlider.text = "3"
+        btnReset.isHidden = true
+        constrainReset.constant = 0
     }
     
     @IBAction func disMiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+
     @IBAction func slideSpeed(_ sender: UISlider) {
-        imagesPerSecond = TimeInterval(10.2 - sender.value)
+        imagesPerSecond = TimeInterval(sender.value)
         timerVideoGif = Int(sender.value)
         lblShowValueSlider.text = "\(sender.value)"
     }
@@ -48,35 +62,70 @@ class GifAndCameraViewController: UIViewController {
     // MARK: CREATE GIF
     
     @IBAction func audioGif(_ sender: Any) {
+        // hidden Create Gif and Create Video
+        stackViewHidden.isHidden = true
+        stackTimeSpeedHidden.isHidden = true
+        btnReset.isHidden = false
+        constrainViewGifandVideo.constant = 0
+        constrainSpeed.constant = 0
+        constrainReset.constant = 45
+        constrainTopSpeed.constant = 0
+        constrainBottomSpeed.constant = 0
          lblTut.isHidden = true
+
+        // Create Gif
+        videogif.animationImages = arrimageVideo
+        videogif.animationDuration = TimeInterval(timerVideoGif)
         if videoPlayerVc != nil {
           videoPlayerVc.view.isHidden = true
         }
-   
          videogif.isHidden = false
-        videogif.layer.speed = Float(2)
          videogif.startAnimating()
     }
-    @IBAction func stopAudioGif(_ sender: Any) {
-        videogif.stopAnimating()
+
+    @IBAction func ShareAudioGifandVideo(_ sender: Any) {
+        // Share Video
+        let videoURL = URL(fileURLWithPath: urlString)
+        let activityItems: [Any] = [videoURL, "Check this out!"]
+        let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = view
+        activityController.popoverPresentationController?.sourceRect = view.frame
+
+        self.present(activityController, animated: true, completion: nil)
+
+        // Share Gif
+//        let shareURL: URL = URL(fileURLWithPath: urlString)
+//        do {
+//            let shareData: Data = try Data(contentsOf: shareURL)
+//            let firstActivityItem: Array = [shareData]
+//            let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
+//            self.present(activityViewController, animated: true, completion: nil)
+//        } catch {
+//            print("okok")
+//        }
+
     }
 
-    @IBAction func playvideo(_ sender: Any) {
-        print(urlString)
-        
-//        present(videoPlayer, animated: true) {
-//
-//                player.play()
-//                        }
-    
-//        if let path = Bundle.main.path(forResource: urlString, ofType: "mp4") {
-//            let video = AVPlayer(url: URL(fileURLWithPath: path))
-//
-//            videoPlayer.player = player
-//            present(videoPlayer, animated: true) {
-//                video.play()
-//            }
-//        }
+    @IBAction func saveCameraRoll(_ sender: Any) {
+        var placeHolder : PHObjectPlaceholder?
+        PHPhotoLibrary.shared().performChanges({
+            let creationRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(string: self.urlString)! )
+            placeHolder = creationRequest?.placeholderForCreatedAsset
+
+        }, completionHandler: { (success, error) in
+            if success {
+                let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+                //               let result = PHAsset.fetchAssets(withLocalIdentifiers: [placeHolder!.localIdentifier], options: nil)
+                //                result.firstObject?.PHAsset(
+                //
+                //                    // this is the url to the saved asset
+                //
+                //                })
+            }
+        })
     }
 
       // MARK: PLAY VIDEO
@@ -88,8 +137,7 @@ class GifAndCameraViewController: UIViewController {
         if (videoPlayerVc == nil) {
            videoPlayerVc = AVPlayerViewController()
             //        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            
-           
+
             let  player = AVPlayer(playerItem: playerItem)
             
             //play using layer
@@ -99,9 +147,7 @@ class GifAndCameraViewController: UIViewController {
             //        self.view.layer.addSublayer(playerLayer)
             //
             //        player.play()
-            
-            
-            
+
             //add controller as child
             videoPlayerVc.player = player
            
@@ -116,13 +162,43 @@ class GifAndCameraViewController: UIViewController {
         videogif.isHidden = true
         videoPlayerVc.view.isHidden = false
         videoPlayerVc.player?.play()
-        
     }
 
     @IBAction func audioVideo(_ sender: Any) {
+        // hidden Create Gif and Create Video
+        stackViewHidden.isHidden = true
+        stackTimeSpeedHidden.isHidden = true
+        btnReset.isHidden = false
+        constrainViewGifandVideo.constant = 0
+        constrainSpeed.constant = 0
+        constrainReset.constant = 45
+        constrainTopSpeed.constant = 0
+        constrainBottomSpeed.constant = 0
+
+        //Play Video
         buildVideoFromImageArray()
-     
     }
+
+    @IBAction func resetGifAndVideo(_ sender: UIButton) {
+        // Show Create Gif and Create Video
+        stackViewHidden.isHidden = false
+        stackTimeSpeedHidden.isHidden = false
+        btnReset.isHidden = true
+        constrainViewGifandVideo.constant = 45
+        constrainSpeed.constant = 30
+        constrainReset.constant = 0
+        constrainTopSpeed.constant = 15
+        constrainBottomSpeed.constant = 15
+        lblTut.isHidden = false
+
+        //Remove Video and Gif
+        removeFileAtURLIfExists(url: NSURL(fileURLWithPath: urlString))
+        videoPlayerVc?.player?.pause()
+        videoPlayerVc?.view.removeFromSuperview()
+        videoPlayerVc = nil
+        videogif.stopAnimating()
+    }
+
 
     func buildVideoFromImageArray() {
         selectedPhotosArray = arrimageVideo
@@ -152,7 +228,7 @@ class GifAndCameraViewController: UIViewController {
             let media_queue = DispatchQueue(label: "mediaInputQueue")
             videoWriterInput.requestMediaDataWhenReady(on: media_queue, using: { () -> Void in
                 let fps: Int32 = 10000
-                
+
                 let framePerSecond: Int64 = Int64(self.imagesPerSecond * 10000)
                 let frameDuration = CMTimeMake(Int64(self.imagesPerSecond * 10000), fps)
                 var frameCount: Int64 = 0

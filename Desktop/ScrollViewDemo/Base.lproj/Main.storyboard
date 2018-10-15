@@ -292,10 +292,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aJ9-wk-9Ev">
-                                <rect key="frame" x="20" y="425" width="335" height="50"/>
+                                <rect key="frame" x="20" y="480" width="335" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2I-6M-VaO">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="45"/>
                                         <color key="backgroundColor" red="0.81935709376084476" green="0.64756451060068032" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Create Gif">
@@ -306,7 +306,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-eR-58H">
-                                        <rect key="frame" x="175" y="0.0" width="160" height="50"/>
+                                        <rect key="frame" x="175" y="0.0" width="160" height="45"/>
                                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Create video">
@@ -317,32 +317,38 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="oyr-S8-sNp"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYK-MI-uOT">
-                                <rect key="frame" x="63" y="560" width="250" height="50"/>
+                                <rect key="frame" x="62.5" y="605" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.89411764709999997" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Toe-VV-Zgk"/>
+                                    <constraint firstAttribute="height" constant="45" id="Toe-VV-Zgk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Save To CameraRoll">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="playvideo:" destination="mZV-3c-877" eventType="touchUpInside" id="Mz3-h5-Dgi"/>
+                                    <action selector="saveCameraRoll:" destination="mZV-3c-877" eventType="touchUpInside" id="Mz3-h5-Dgi"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CtQ-oK-o1Z">
-                                <rect key="frame" x="19" y="380" width="337.5" height="30"/>
+                                <rect key="frame" x="19" y="435" width="337.5" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-5X-6Os">
-                                        <rect key="frame" x="0.0" y="0.0" width="79.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-5X-6Os">
+                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-Wa-QAg">
-                                        <rect key="frame" x="87.5" y="0.0" width="221" height="31"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.10000000000000001" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-Wa-QAg">
+                                        <rect key="frame" x="99.5" y="0.0" width="209" height="31"/>
+                                        <connections>
+                                            <action selector="slideSpeed:" destination="mZV-3c-877" eventType="valueChanged" id="gwi-eL-Svr"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-hp-v2A">
                                         <rect key="frame" x="316.5" y="0.0" width="21" height="30"/>
@@ -356,17 +362,17 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGO-PV-eND">
-                                <rect key="frame" x="62" y="492" width="250" height="50"/>
+                                <rect key="frame" x="62.5" y="542" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="q5B-vf-BWF"/>
+                                    <constraint firstAttribute="height" constant="45" id="q5B-vf-BWF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Share To">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopAudioGif:" destination="mZV-3c-877" eventType="touchUpInside" id="naJ-Ia-1ne"/>
+                                    <action selector="ShareAudioGifandVideo:" destination="mZV-3c-877" eventType="touchUpInside" id="naJ-Ia-1ne"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvf-Cz-zJh" userLabel="View - present">
@@ -395,28 +401,45 @@
                                     <constraint firstItem="1Bm-Ja-Mfg" firstAttribute="leading" secondItem="Wvf-Cz-zJh" secondAttribute="leading" id="zJM-u5-rNW"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xS-qJ-6fR">
+                                <rect key="frame" x="62.5" y="375" width="250" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Nm1-Ha-OWt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetGifAndVideo:" destination="mZV-3c-877" eventType="touchUpInside" id="Cez-D9-fBE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aJ9-wk-9Ev" firstAttribute="leading" secondItem="tDF-5l-wX9" secondAttribute="leading" constant="20" id="10c-i7-NAj"/>
+                            <constraint firstItem="CtQ-oK-o1Z" firstAttribute="top" secondItem="7xS-qJ-6fR" secondAttribute="bottom" constant="15" id="17M-TW-rhk"/>
                             <constraint firstItem="aJ9-wk-9Ev" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="2kP-rN-o3T"/>
+                            <constraint firstItem="HGO-PV-eND" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="3x1-O8-LiO"/>
+                            <constraint firstItem="HGO-PV-eND" firstAttribute="width" secondItem="7xS-qJ-6fR" secondAttribute="width" id="6M7-eO-0jm"/>
+                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="top" secondItem="CtQ-oK-o1Z" secondAttribute="bottom" constant="15" id="Bff-st-RLF"/>
                             <constraint firstItem="Wvf-Cz-zJh" firstAttribute="height" secondItem="Cw1-H1-9h6" secondAttribute="height" multiplier="0.45" id="Dde-t2-wuT"/>
                             <constraint firstItem="Wvf-Cz-zJh" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="Giq-Ji-xsC"/>
                             <constraint firstItem="Wvf-Cz-zJh" firstAttribute="top" secondItem="tDF-5l-wX9" secondAttribute="top" constant="45" id="L1P-4A-f0x"/>
                             <constraint firstItem="HGO-PV-eND" firstAttribute="top" secondItem="aJ9-wk-9Ev" secondAttribute="bottom" constant="17" id="Le0-ut-Du1"/>
                             <constraint firstItem="eYK-MI-uOT" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="Ma9-Jx-rWp"/>
-                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="top" secondItem="CtQ-oK-o1Z" secondAttribute="bottom" constant="15" id="MiA-n4-m4Q"/>
                             <constraint firstItem="eYK-MI-uOT" firstAttribute="top" secondItem="HGO-PV-eND" secondAttribute="bottom" constant="18" id="Opo-10-mBL"/>
                             <constraint firstItem="Wvf-Cz-zJh" firstAttribute="width" secondItem="Cw1-H1-9h6" secondAttribute="width" multiplier="0.8" id="eFs-bk-enA"/>
+                            <constraint firstItem="7xS-qJ-6fR" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="eua-R8-5Ly"/>
                             <constraint firstItem="HGO-PV-eND" firstAttribute="width" secondItem="Cw1-H1-9h6" secondAttribute="width" multiplier="2:3" id="gec-1j-o18"/>
                             <constraint firstItem="tDF-5l-wX9" firstAttribute="trailing" secondItem="aJ9-wk-9Ev" secondAttribute="trailing" constant="20" id="hMB-cP-X3o"/>
-                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="height" secondItem="HGO-PV-eND" secondAttribute="height" id="hdX-3V-5uy"/>
-                            <constraint firstItem="aJ9-wk-9Ev" firstAttribute="top" secondItem="Wvf-Cz-zJh" secondAttribute="bottom" constant="60" id="kpt-zc-g3z"/>
                             <constraint firstItem="eYK-MI-uOT" firstAttribute="height" secondItem="HGO-PV-eND" secondAttribute="height" id="m4x-Ma-jiR"/>
                             <constraint firstItem="HGO-PV-eND" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="mrg-Kp-djS"/>
                             <constraint firstItem="eYK-MI-uOT" firstAttribute="width" secondItem="HGO-PV-eND" secondAttribute="width" id="uAF-6c-I0T"/>
                             <constraint firstItem="CtQ-oK-o1Z" firstAttribute="centerX" secondItem="Cw1-H1-9h6" secondAttribute="centerX" id="uQX-HK-SjE"/>
                             <constraint firstItem="CtQ-oK-o1Z" firstAttribute="width" secondItem="Cw1-H1-9h6" secondAttribute="width" multiplier="0.9" id="vtR-6x-Ur8"/>
+                            <constraint firstItem="7xS-qJ-6fR" firstAttribute="top" secondItem="Wvf-Cz-zJh" secondAttribute="bottom" constant="10" id="zU2-Ya-btv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tDF-5l-wX9"/>
                     </view>
@@ -428,7 +451,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnReset" destination="7xS-qJ-6fR" id="sNs-Bv-uNC"/>
+                        <outlet property="constrainBottomSpeed" destination="Bff-st-RLF" id="QDH-Vr-xKe"/>
+                        <outlet property="constrainReset" destination="Nm1-Ha-OWt" id="AXX-8r-ecx"/>
+                        <outlet property="constrainSpeed" destination="VEU-m5-o7K" id="WsZ-I8-W5j"/>
+                        <outlet property="constrainTopSpeed" destination="17M-TW-rhk" id="f7n-bc-Z0p"/>
+                        <outlet property="constrainViewGifandVideo" destination="oyr-S8-sNp" id="fAo-hG-ZGd"/>
+                        <outlet property="lblShowValueSlider" destination="tTP-hp-v2A" id="tgA-hA-GZl"/>
                         <outlet property="lblTut" destination="NGK-c0-vU4" id="0Bo-nq-LMk"/>
+                        <outlet property="sliderSetValue" destination="DEn-Wa-QAg" id="NAP-Bn-9Bc"/>
+                        <outlet property="stackTimeSpeedHidden" destination="CtQ-oK-o1Z" id="LAA-jS-1lE"/>
+                        <outlet property="stackViewHidden" destination="aJ9-wk-9Ev" id="aMQ-iz-sk7"/>
                         <outlet property="videogif" destination="1Bm-Ja-Mfg" id="Wed-4g-xTK"/>
                         <outlet property="viewPresent" destination="Wvf-Cz-zJh" id="3Va-68-U74"/>
                     </connections>
