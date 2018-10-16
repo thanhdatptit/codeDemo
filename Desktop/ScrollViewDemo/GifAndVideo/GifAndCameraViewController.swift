@@ -75,7 +75,7 @@ class GifAndCameraViewController: UIViewController {
         btnSaveCameraRoll.layer.cornerRadius = btnSaveCameraRoll.frame.height / 2
         createGif.layer.cornerRadius = 7
         createVideo.layer.cornerRadius = 7
-        viewShowVideoAndGif.layer.cornerRadius = 25
+        viewShowVideoAndGif.layer.cornerRadius = 30
         viewShowVideoAndGif.clipsToBounds = true
         if let setValueSlider = UserDefaults.standard.object(forKey: "sliderValue") as? Float {
             self.sliderSetValue.value = setValueSlider
@@ -135,15 +135,29 @@ class GifAndCameraViewController: UIViewController {
             btnReset.isHidden = false
             // Share Gif
            // let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0].appending("/animated.gif")
-            let shareURL: URL = URL(fileURLWithPath: urlGifString)
+
+            var shareURL: URL = URL(string: urlGifString)!
             do {
-                let shareData: Data = try Data(contentsOf: shareURL)
+                let  shareData: NSData = try NSData(contentsOf: shareURL)
                 let firstActivityItem: Array = [shareData]
                 let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
                 self.present(activityViewController, animated: true, completion: nil)
             } catch {
-                print("okok")
+                print("error")
             }
+
+
+
+
+//            let shareURL: URL = URL(fileURLWithPath: urlGifString)
+//            do {
+//                let shareData: Data = try Data(contentsOf: shareURL)
+//                let firstActivityItem: Array = [shareData]
+//                let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
+//                self.present(activityViewController, animated: true, completion: nil)
+//            } catch {
+//                print("okok")
+//            }
 
         } else {
             print("ajskljas")
