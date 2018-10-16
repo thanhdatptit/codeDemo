@@ -13,6 +13,7 @@ import Photos
 import SwiftMessages
 import NVActivityIndicatorView
 import MobileCoreServices
+import AssetsLibrary
 
 var urlGifString = ""
 
@@ -75,8 +76,8 @@ class GifAndCameraViewController: UIViewController {
         btnSaveCameraRoll.layer.cornerRadius = btnSaveCameraRoll.frame.height / 2
         createGif.layer.cornerRadius = 7
         createVideo.layer.cornerRadius = 7
-        viewShowVideoAndGif.layer.cornerRadius = 30
-        viewShowVideoAndGif.clipsToBounds = true
+        viewPresent.layer.cornerRadius = 30
+        viewPresent.clipsToBounds = true
         if let setValueSlider = UserDefaults.standard.object(forKey: "sliderValue") as? Float {
             self.sliderSetValue.value = setValueSlider
             lblShowValueSlider.text = "\(setValueSlider)"
@@ -114,8 +115,9 @@ class GifAndCameraViewController: UIViewController {
         // Create Gif
         let imageURL = UIImage.gifImageWithURL(urlGifString)
         let imageView3 = UIImageView(image: imageURL)
-        imageView3.frame = CGRect(x: 0, y: 0, width: videogif.frame.width, height: videogif.frame.height)
-        imageView3.layer.cornerRadius = 17
+        imageView3.frame = CGRect(x: 0, y: 0, width: viewPresent.frame.width, height: viewPresent.frame.height)
+     //   imageView3.layer.cornerRadius = 17
+       // imageView3.clipsToBounds = true
         videogif.addSubview(imageView3)
     }
 
@@ -134,9 +136,7 @@ class GifAndCameraViewController: UIViewController {
         } else if checkCreateVideoAndGit == 1  {
             btnReset.isHidden = false
             // Share Gif
-           // let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0].appending("/animated.gif")
-
-            var shareURL: URL = URL(string: urlGifString)!
+            let shareURL: URL = URL(string: urlGifString)!
             do {
                 let  shareData: NSData = try NSData(contentsOf: shareURL)
                 let firstActivityItem: Array = [shareData]
@@ -145,20 +145,6 @@ class GifAndCameraViewController: UIViewController {
             } catch {
                 print("error")
             }
-
-
-
-
-//            let shareURL: URL = URL(fileURLWithPath: urlGifString)
-//            do {
-//                let shareData: Data = try Data(contentsOf: shareURL)
-//                let firstActivityItem: Array = [shareData]
-//                let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
-//                self.present(activityViewController, animated: true, completion: nil)
-//            } catch {
-//                print("okok")
-//            }
-
         } else {
             print("ajskljas")
             btnReset.isHidden = false
@@ -186,7 +172,26 @@ class GifAndCameraViewController: UIViewController {
             config.duration = .automatic
             SwiftMessages.show(config: config, view: view)
         } else if checkCreateVideoAndGit == 1 {
-                print("saveGif")
+            var placeHolder : PHObjectPlaceholder?
+            PHPhotoLibrary.shared().performChanges({
+                let creationRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(string: urlGifString)! )
+                placeHolder = creationRequest?.placeholderForCreatedAsset
+
+            }, completionHandler: { (success, error) in 
+                if success {
+                    let title = "Notification"
+                    let message = "Your video was successfully saved"
+                    let view = MessageView.viewFromNib(layout: .cardView)
+                    view.configureTheme(.success)
+                    view.configureContent(title: title, body: message)
+                    view.button?.isHidden = true
+                    //Config
+                    var config = SwiftMessages.Config()
+                    config.duration = .automatic
+                    SwiftMessages.show(config: config, view: view)
+                }
+            })
+
         } else {
             var placeHolder : PHObjectPlaceholder?
             PHPhotoLibrary.shared().performChanges({
@@ -216,6 +221,21 @@ class GifAndCameraViewController: UIViewController {
             })
         }
     }
+
+//    class func saveToCameraRoll(imageUrl: String) {
+//        ImageService.GetImageData(url: imageUrl) { data in // This helper function just fetches Data from the url using Alamofire
+//            guard let data = data else { return }
+//            PHPhotoLibrary.shared().performChanges({ _ in
+//                PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
+//            }) { success, error in
+//                guard success else {
+//                    log.debug("failed to save gif \(error)")
+//                    return
+//                }
+//                log.debug("successfully saved gif")
+//            }
+//        }
+//    }
 
       // MARK: PLAY VIDEO
     //Edited By Manh Nguyen
@@ -248,7 +268,7 @@ class GifAndCameraViewController: UIViewController {
             videoPlayerVc.player?.replaceCurrentItem(with: playerItem)
             
         }
-        videogif.isHidden = true
+    //    videogif.isHidden = true
         videoPlayerVc.view.isHidden = false
         videoPlayerVc.player?.play()
         self.loadingView.stopAnimating()
@@ -291,8 +311,8 @@ class GifAndCameraViewController: UIViewController {
         videoPlayerVc?.player?.pause()
         videoPlayerVc?.view.removeFromSuperview()
         videoPlayerVc = nil
-        videogif.stopAnimating()
-    }
+    //    videogif.removeFromSuperview()
+        }
 
 
     func buildVideoFromImageArray() {
@@ -316,7 +336,6 @@ class GifAndCameraViewController: UIViewController {
         if videoWriter.startWriting() {
             let timeMake = imagesPerSecond * 10000
             let zeroTime = CMTimeMake(Int64(timeMake), 10000)
-//            let zeroTime = CMTimeMake(Int64(imagesPerSecond),Int32(1))
             videoWriter.startSession(atSourceTime: zeroTime)
 
             assert(pixelBufferAdaptor.pixelBufferPool != nil)
