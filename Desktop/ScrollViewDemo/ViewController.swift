@@ -15,10 +15,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     var arrimageView = [UIImage]()
     var arrListConten = [ItemScrollView]()
     var checkEmoj = 0
-
+    var isDragging: Bool = false
+    var oldX: CGFloat = 0
+    var oldY: CGFloat = 0
+    var lblGuidle :UILabel!
+    var viewFontSizeEdit: UIView!
     fileprivate var numberWidthMenuSelect = 0
     fileprivate var numberheighMenuSelect = 52
-
+    var isShowEditedControl: Bool!
     fileprivate var customKeyBoardAccessView: UIView!
     fileprivate var txfInput : UITextField!
     fileprivate var numberFrameXibWidth:CGFloat = 0
@@ -36,14 +40,26 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 
     @IBOutlet weak var viewMenuBottom: UIView!
 
+    @IBOutlet weak var btnMakeNow: UIButton!
+    
+    @IBOutlet weak var btnAddMore: UIButton!
+    
+    @IBAction func makeNowAction(_ sender: Any) {
+    }
     var arrNumbers = [UIButton]()
     var arrXib = [UIView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollMenuBot.delegate = self
+        self.navigationController?.navigationBar.isOpaque = true
+        self.navigationController?.navigationBar.isTranslucent = false
+        btnMakeNow.layer.cornerRadius = 10
+        
+        btnMakeNow.clipsToBounds = true
         addButton12()
         cusTomView()
+        isShowEditedControl = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -113,7 +129,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         txfInput.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         txfInput.delegate = self
         customKeyBoardAccessView.addSubview(txfInput)
-        customKeyBoardAccessView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        customKeyBoardAccessView.backgroundColor = Constant.TEXT_EDIT_BG_COLOR
         //        txFShowText.inputAccessoryView = customKeyBoardAccessView
 
         numberFrameXibWidth = scrollViewMain.frame.size.width
@@ -164,21 +180,45 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         viewMenuBottom.bringSubview(toFront: views[0])
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
+        tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
 
+    // MARK: DISSMISS KEYBOARD
     @objc func dismissKeyboard(){
         view.endEditing(true)
         txFShowText.resignFirstResponder()
         let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+         currentItem.lblBackground.isUserInteractionEnabled = false
+        self.changeTextAtributtedBGColor(lbl: currentItem.lblBackground, color: UIColor.clear)
         if (currentItem.lblBackground.text?.isEmpty)! {
-                currentItem.lblTut.isHidden = false
+              currentItem.lblTut.isHidden = false
+            
         }
+        self.guidleText(show: false)
+        self.showFontSizeEdit(show: false)
     }
     
     @objc func textInputChanged(textView : UITextView) {
           let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
             currentItem.lblBackground.text = textView.text;
+          self.changeTextAtributtedBGColor(lbl: currentItem.lblBackground, color: UIColor.red)
+        
+    }
+    
+    // MARK: CHANGE TEXT ATTRIBUTED COLOR
+    func changeTextAtributtedBGColor(lbl: UILabel, color : UIColor) {
+        //creating attributed string
+        let atrribString: NSMutableAttributedString = NSMutableAttributedString(attributedString: NSAttributedString(string:lbl.text!))
+        //setting background color to attributed text
+        atrribString.addAttribute(NSAttributedStringKey.backgroundColor, value: color, range: NSMakeRange(0, atrribString.length))
+        //setting attributed text to label
+       lbl.attributedText = atrribString
+        
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
     }
     
     // add more number scrollview's item
@@ -201,6 +241,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         scrollViewNumber.isPagingEnabled = true
         let tapGest: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedScrollViewMain))
         scrollViewMain.addGestureRecognizer(tapGest)
+        
         button.setTitle("\(number + 1)", for: .normal)
         button.addTarget(self, action: #selector(clickItem), for: .touchUpInside)
         button.tag = arrNumbers.count - 1
@@ -212,6 +253,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         
         let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
         currentItem.lblTut.isHidden = true
+        
+        //edited by Manh
+        self.guidleText(show: true)
+        self.showFontSizeEdit(show: true)
+        
+        currentItem.lblBackground.isUserInteractionEnabled = true
+        self.changeTextAtributtedBGColor(lbl: currentItem.lblBackground, color: UIColor.red)
+        
+        
         if  (currentItem.lblBackground.text?.isEmpty)!{
             txfInput.text = ""
             txfInput.placeholder = "dfd"
@@ -224,8 +274,54 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         txfInput.becomeFirstResponder()
     }
    
-
-
+    // MARK: GUIDLE TEXT
+    func guidleText(show:Bool) {
+        //create guidle view
+        if show {
+            if lblGuidle != nil{
+                return
+            }
+            
+            lblGuidle  = UILabel(frame: CGRect(x: Constant.MAIN_SCREEN_SIZE.width / 2 - Constant.TEXT_GUIDLE_SIZE.width / 2, y: -Constant.TEXT_GUIDLE_SIZE.height, width: Constant.TEXT_GUIDLE_SIZE.width, height: Constant.TEXT_GUIDLE_SIZE.height))
+            
+            lblGuidle.backgroundColor = Constant.TEXT_EDIT_BG_COLOR
+            lblGuidle.textColor = UIColor.white
+            lblGuidle.layer.cornerRadius = 10
+            lblGuidle.layer.masksToBounds = true
+            lblGuidle.textAlignment = NSTextAlignment.center
+            lblGuidle.text = "Touch & Drag Text To Move"
+            self.view.addSubview(lblGuidle)
+           
+            UIView.animate(withDuration: 0.3, animations: {
+                self.scrollViewNumber.alpha = 0.0
+                self.btnAddMore.isEnabled = false
+                self.btnAddMore.alpha = 0.0
+                self.lblGuidle.frame = CGRect(x: Constant.MAIN_SCREEN_SIZE.width / 2 - Constant.TEXT_GUIDLE_SIZE.width / 2, y: self.scrollViewNumber.frame.origin.y, width: Constant.TEXT_GUIDLE_SIZE.width, height: Constant.TEXT_GUIDLE_SIZE.height)
+                
+            }) { (true) in
+                
+            }
+        }
+        else{
+            if lblGuidle == nil{
+                return
+            }
+   
+            UIView.animate(withDuration: 0.3, animations: {
+                self.lblGuidle.frame =  CGRect(x: Constant.MAIN_SCREEN_SIZE.width / 2 - Constant.TEXT_GUIDLE_SIZE.width / 2, y: -Constant.TEXT_GUIDLE_SIZE.height, width: Constant.TEXT_GUIDLE_SIZE.width, height: Constant.TEXT_GUIDLE_SIZE.height)
+                self.scrollViewNumber.alpha = 1
+                self.btnAddMore.isEnabled = true
+                self.btnAddMore.alpha = 1
+                
+            }) { (true) in
+                   self.lblGuidle?.removeFromSuperview()
+                   self.lblGuidle = nil
+                
+            }
+            
+        }
+       
+    }
 
     @IBAction func upLoadingGifVideo(_ sender: Any) {
         let numberCountArrXib = arrXib.count
@@ -382,6 +478,100 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         }
     }
     var numberIndext = 0
+    
+    
+    
+    // MARK: FONT SIZE
+    func showFontSizeEdit(show: Bool){
+        
+        if show {
+            if isShowEditedControl {
+                return
+            }
+           
+            if viewFontSizeEdit == nil{
+                let heightOfView = Constant.BUTTON_FONT_SIZE.height * 4 + 5 * Constant.BUTTON_FONT_SIZE_MARGIN
+                viewFontSizeEdit = UIView(frame: CGRect(x: Constant.MAIN_SCREEN_SIZE.width, y: (scrollViewMain.frame.origin.y + scrollViewMain.frame.size.height / 2) - heightOfView / 2 , width: Constant.VIEW_FONT_SIZE.width, height:heightOfView))
+                viewFontSizeEdit.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                let lblSize : UILabel = UILabel(frame: CGRect(x: Constant.VIEW_FONT_SIZE.width / 2 - Constant.BUTTON_FONT_SIZE.width / 2, y: Constant.BUTTON_FONT_SIZE_MARGIN, width: Constant.BUTTON_FONT_SIZE.width, height: Constant.BUTTON_FONT_SIZE.height))
+                lblSize.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                lblSize.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                self.layerElement(ele: lblSize.layer, borderColor: UIColor.red, cornerRadius: 7)
+                lblSize.text = "20"
+                lblSize.font = UIFont.systemFont(ofSize: 19)
+                lblSize.textAlignment = NSTextAlignment.center
+                viewFontSizeEdit.addSubview(lblSize)
+                let btnPlus: UIButton = UIButton(frame: CGRect(x: Constant.VIEW_FONT_SIZE.width / 2 - Constant.BUTTON_FONT_SIZE.width / 2, y: Constant.BUTTON_FONT_SIZE.width + 2 * Constant.BUTTON_FONT_SIZE_MARGIN, width: Constant.BUTTON_FONT_SIZE.width, height: Constant.BUTTON_FONT_SIZE.height))
+                
+                btnPlus.backgroundColor =  #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+                self.layerElement(ele: btnPlus.layer, borderColor: UIColor.red, cornerRadius: 7)
+                btnPlus.setTitleColor(UIColor.white, for: UIControlState.normal)
+                btnPlus.setTitle("+", for: UIControlState.normal)
+                btnPlus.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 22)
+                btnPlus.addTarget(self, action: #selector(plusFontSizeAction(sender:)), for: UIControlEvents.touchUpInside)
+                viewFontSizeEdit.addSubview(btnPlus)
+                
+                let btnMinus: UIButton = UIButton(frame: CGRect(x: Constant.VIEW_FONT_SIZE.width / 2 - Constant.BUTTON_FONT_SIZE.width / 2, y: 2 * Constant.BUTTON_FONT_SIZE.height + 3 * Constant.BUTTON_FONT_SIZE_MARGIN, width: Constant.BUTTON_FONT_SIZE.width, height: Constant.BUTTON_FONT_SIZE.height))
+                btnMinus.backgroundColor =  #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+                btnMinus.setTitleColor(UIColor.white, for: UIControlState.normal)
+                btnMinus.setTitle("-", for: UIControlState.normal)
+                btnMinus.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+                self.layerElement(ele: btnMinus.layer, borderColor: UIColor.red, cornerRadius: 7)
+                btnMinus.addTarget(self, action: #selector(minusFontSizeAction), for: UIControlEvents.touchUpInside)
+                 viewFontSizeEdit.addSubview(btnMinus)
+                
+                //add back to default button
+                let btnDefault: UIButton = UIButton(frame: CGRect(x: Constant.VIEW_FONT_SIZE.width / 2 - Constant.BUTTON_FONT_SIZE.width / 2, y: 3 * Constant.BUTTON_FONT_SIZE.height + 4 * Constant.BUTTON_FONT_SIZE_MARGIN, width: Constant.BUTTON_FONT_SIZE.width, height: Constant.BUTTON_FONT_SIZE.height))
+                btnDefault.backgroundColor =  #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                btnDefault.setImage(#imageLiteral(resourceName: "return"), for: UIControlState.normal)
+                btnDefault.setTitleColor(UIColor.white, for: UIControlState.normal)
+               
+           
+                self.layerElement(ele: btnDefault.layer, borderColor: UIColor.red, cornerRadius: 7)
+                btnDefault.addTarget(self, action: #selector(backToDefaultSet), for: UIControlEvents.touchUpInside)
+                viewFontSizeEdit.addSubview(btnDefault)
+                
+               self.layerElement(ele: viewFontSizeEdit.layer, borderColor: UIColor.red, cornerRadius: 10)
+                self.view.addSubview(viewFontSizeEdit)
+            }
+            else{
+                //do nothing
+            }
+            UIView.animate(withDuration: 0.3) {
+                self.viewFontSizeEdit.frame = CGRect(x: Constant.MAIN_SCREEN_SIZE.width - Constant.VIEW_FONT_SIZE.width - 5, y: self.viewFontSizeEdit.frame.origin.y, width: Constant.VIEW_FONT_SIZE.width, height: self.viewFontSizeEdit.frame.size.height)
+                self.btnMakeNow.isEnabled = false
+                self.btnMakeNow.alpha = 0.0
+                
+            }
+            isShowEditedControl = true
+        }
+        else{
+            UIView.animate(withDuration: 0.3) {
+                self.viewFontSizeEdit.frame = CGRect(x: Constant.MAIN_SCREEN_SIZE.width, y: self.viewFontSizeEdit.frame.origin.y, width: Constant.VIEW_FONT_SIZE.width, height: self.viewFontSizeEdit.frame.size.height)
+                self.btnMakeNow.isEnabled = true
+                self.btnMakeNow.alpha = 1.0
+            }
+            isShowEditedControl = false
+        }
+       
+    }
+    
+    
+    func layerElement(ele: CALayer, borderColor : UIColor, cornerRadius : CGFloat ) {
+        ele.cornerRadius = cornerRadius
+        ele.masksToBounds = true
+    }
+    
+    @objc func plusFontSizeAction(sender: UIButton)  {
+        
+    }
+    @objc func minusFontSizeAction(sender: UIButton)  {
+        
+    }
+    
+    @objc func backToDefaultSet(sender: UIButton)  {
+        
+    }
     // MARK:  SCROLLVIEW DELEGATE
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -479,6 +669,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 //            currentItem.lblBackground.frame.origin = CGPoint(x:position.x-60,y:position.y-50)
 //        }
 //    }
+    
+    
+    // MARK: TOUCH DELEGATE
+  
 }
 
 extension CGFloat {
@@ -535,9 +729,9 @@ extension ViewController: ColorTextViewControllerDelegate {
 extension ViewController: ColorBackgroungViewControllerDelegate {
     func colorBackgroungView(_ viewcontroller: ColorBackgroungViewController, didselectBackground colorBackground: UIColor) {
         if checkEmoj == 0 {
-            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.imagBackground.backgroundColor = colorBackground
         } else {
-            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.backgroundColor = colorBackground
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.imagBackground.backgroundColor = colorBackground
         }
     }
 }
@@ -551,3 +745,4 @@ extension ViewController: TextImageViewControllerDelegate {
         }
     }
 }
+
