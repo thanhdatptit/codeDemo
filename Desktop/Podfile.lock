@@ -1,0 +1,28 @@
+PODS:
+  - DGActivityIndicatorView (2.1.1)
+  - NVActivityIndicatorView (4.4.0):
+    - NVActivityIndicatorView/Presenter (= 4.4.0)
+  - NVActivityIndicatorView/Presenter (4.4.0)
+  - SwiftMessages (5.0.1):
+    - SwiftMessages/App (= 5.0.1)
+  - SwiftMessages/App (5.0.1)
+
+DEPENDENCIES:
+  - DGActivityIndicatorView
+  - NVActivityIndicatorView
+  - SwiftMessages (~> 5.0.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DGActivityIndicatorView
+    - NVActivityIndicatorView
+    - SwiftMessages
+
+SPEC CHECKSUMS:
+  DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
+  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
+  SwiftMessages: 32ce3cfc8388b41aae56ff4853cc752a20101147
+
+PODFILE CHECKSUM: 453f006e1782083862cf067ea8c2cb1e94d423ef
+
+COCOAPODS: 1.5.3

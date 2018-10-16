@@ -1,0 +1,11 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'ScrollViewDemo' do
+  use_frameworks!
+
+pod 'SwiftMessages', '~> 5.0.1'
+pod 'NVActivityIndicatorView'
+pod 'DGActivityIndicatorView'
+
+end
