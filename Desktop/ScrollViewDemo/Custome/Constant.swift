@@ -12,7 +12,7 @@ class Constant {
     
 
   static let VIEW_ACCSESS_KEYB_SIZE =                    CGSize(width: MAIN_SCREEN_SIZE.width - 10, height: 44.0)
-  static let TEXTFILED_ACCSESS_KEYB_SIZE =               CGSize(width: VIEW_ACCSESS_KEYB_SIZE.width - 10, height: 30.0)
+  static let TEXTFILED_ACCSESS_KEYB_SIZE =               CGSize(width: VIEW_ACCSESS_KEYB_SIZE.width - 50, height: 30.0)
   static let MAIN_SCREEN_SIZE     =                      UIScreen.main.bounds
   static let SELECTED_COLOR     =                        #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
   static let TEXT_EDIT_BG_COLOR     =                    #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)

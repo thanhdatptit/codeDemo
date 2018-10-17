@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScrollViewDemo/GifAndVideo/GifAndCameraViewController.swift"
-            timestampString = "561384743.329198"
+            timestampString = "561460808.86522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "510"
             endingLineNumber = "510"
-            landmarkName = "animatedGif(from:)"
+            landmarkName = "exportVideoWithAnimation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScrollViewDemo/GifAndVideo/GifAndCameraViewController.swift"
-            timestampString = "561384743.329699"
+            timestampString = "561460808.8659199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
             endingLineNumber = "103"
-            landmarkName = "audioGif(_:)"
-            landmarkType = "7">
+            landmarkName = "GifAndCameraViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
