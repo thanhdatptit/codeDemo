@@ -16,115 +16,163 @@ import MobileCoreServices
 import AssetsLibrary
 
 var urlGifString = ""
+var timerVideoGif = 0
 
 class GifAndCameraViewController: UIViewController {
      var urlString = ""
     var checkCreateVideoAndGit = 0
-    @IBOutlet weak var btnReset: UIButton!
-    @IBOutlet weak var btnShareTo: UIButton!
-    @IBOutlet weak var btnSaveCameraRoll: UIButton!
-    @IBOutlet weak var createGif: UIButton!
-    @IBOutlet weak var createVideo: UIButton!
-    @IBOutlet weak var videogif: UIImageView!
-    @IBOutlet weak var viewShowVideoAndGif: UIView!
+    @IBOutlet weak var btnCreateGif: UIButton!
+    @IBOutlet weak var btnCreateVideo: UIButton!
 
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
     @IBOutlet weak var sliderSetValue: UISlider!
     @IBOutlet weak var lblShowValueSlider: UILabel!
     @IBOutlet weak var viewPresent: UIView!
     @IBOutlet weak var lblTut: UILabel!
-    @IBOutlet weak var stackViewHidden: UIStackView!
-    @IBOutlet weak var constrainViewGifandVideo: NSLayoutConstraint!
     @IBOutlet weak var stackTimeSpeedHidden: UIStackView!
-    @IBOutlet weak var constrainSpeed: NSLayoutConstraint!
 
-    @IBOutlet weak var constrainReset: NSLayoutConstraint!
-    @IBOutlet weak var constrainTopSpeed: NSLayoutConstraint!
-    @IBOutlet weak var constrainBottomSpeed: NSLayoutConstraint!
+    @IBOutlet weak var leadingCreateNew: NSLayoutConstraint!
+    @IBOutlet weak var leadingShareTo: NSLayoutConstraint!
+    @IBOutlet weak var leadingSaveToCameraRoll: NSLayoutConstraint!
 
+
+    @IBOutlet weak var btnCreateNew: UIButton!
+    @IBOutlet weak var stackSetTime: UIStackView!
+    @IBOutlet weak var constrainHightStackSetTime: NSLayoutConstraint!
+    @IBOutlet weak var stackCreateGiAndVideo: UIStackView!
+    @IBOutlet weak var constrainStackHightCreateGifAndVideo: NSLayoutConstraint!
+    @IBOutlet weak var constainTopStackCreateGif: NSLayoutConstraint!
+    @IBOutlet weak var btnShareGifAndVideo: UIButton!
+    @IBOutlet weak var btnSaveToCameraRoll: UIButton!
 
     let outputSize = CGSize(width: 1920, height: 1280)
     var imagesPerSecond: TimeInterval = 3 //each image will be stay for 3 secs
     var selectedPhotosArray = [UIImage]()
-    var timerVideoGif = 3
+
     var imageArrayToVideoURL = NSURL()
     let audioIsEnabled: Bool = false //if your video has no sound
     var asset: AVAsset!
-    var numberValueSlider = 0
 
     var videoPlayerVc : AVPlayerViewController!
-
+    var imageView3   : UIImageView!
+    var numberValueSlider:Double = 0
 
     var arrimageVideo:[UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnReset.isHidden = true
-        constrainReset.constant = 0
         UserDefaults.standard.removeObject(forKey: "sliderValue")
-        lblShowValueSlider.text = "3"
-        let imag = UIImage()
-        imag.animatedGif(from: arrimageVideo)
-
+        lblShowValueSlider.text = "3.0"
+        timerVideoGif = 3
+        animation()
+        hiddenCreareNewAndShareSave()
+        btnCreateNew.layer.cornerRadius = btnCreateNew.frame.height / 2
+        btnShareGifAndVideo.layer.cornerRadius = btnShareGifAndVideo.frame.height / 2
+        btnSaveToCameraRoll.layer.cornerRadius = btnSaveToCameraRoll.frame.height / 2
+        btnCreateGif.layer.cornerRadius = 7
+        btnCreateVideo.layer.cornerRadius = 7
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                self.title = "Gif & Video"
-        btnReset.layer.cornerRadius = btnReset.frame.height / 2
-        btnShareTo.layer.cornerRadius = btnShareTo.frame.height / 2
-        btnSaveCameraRoll.layer.cornerRadius = btnSaveCameraRoll.frame.height / 2
-        createGif.layer.cornerRadius = 7
-        createVideo.layer.cornerRadius = 7
-        viewPresent.layer.cornerRadius = 30
-        viewPresent.clipsToBounds = true
+        self.title = "Gif & Video"
         if let setValueSlider = UserDefaults.standard.object(forKey: "sliderValue") as? Float {
             self.sliderSetValue.value = setValueSlider
             lblShowValueSlider.text = "\(setValueSlider)"
         }
     }
+
     
     @IBAction func disMiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 
+    func hiddenCreareNewAndShareSave() {
+        lblTut.isHidden = false
+        btnCreateNew.isHidden = true
+        btnShareGifAndVideo.isHidden = true
+        btnSaveToCameraRoll.isHidden = true
+    }
+
+    func showCreareNewAndShareSave() {
+        lblTut.isHidden = true
+        btnCreateNew.isHidden = false
+        btnShareGifAndVideo.isHidden = false
+        btnSaveToCameraRoll.isHidden = false
+    }
+
+    func hiddenSetTimeandCreateGifVideo() {
+        stackSetTime.isHidden = true
+        constrainHightStackSetTime.constant = 0
+        constainTopStackCreateGif.constant = 0
+        constrainStackHightCreateGifAndVideo.constant = 0
+        stackCreateGiAndVideo.isHidden = true
+    }
+
+    func showSetTimeandCreateGifVideo() {
+        stackSetTime.isHidden = false
+        constrainHightStackSetTime.constant = 31
+        constainTopStackCreateGif.constant = 15
+        constrainStackHightCreateGifAndVideo.constant = 40
+        stackCreateGiAndVideo.isHidden = false
+        animation()
+    }
+
+    func animation() {
+        leadingShareTo.constant -= view.bounds.width
+        leadingCreateNew.constant -= view.bounds.width
+        leadingSaveToCameraRoll.constant -= view.bounds.width
+    }
+
+    func showAnimation() {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            self.leadingCreateNew.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            self.leadingShareTo.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            self.leadingSaveToCameraRoll.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+
+
     @IBAction func slideSpeed(_ sender: UISlider) {
-        imagesPerSecond = TimeInterval(sender.value)
-        timerVideoGif = Int(sender.value)
-        lblShowValueSlider.text = "\(sender.value)"
+        numberValueSlider = Double(sender.value).rounded(toPlaces: 1)
+        imagesPerSecond = numberValueSlider
+        timerVideoGif = Int(numberValueSlider)
+        lblShowValueSlider.text = "\(numberValueSlider)"
         let numberUserDerfault = UserDefaults.standard
-        numberUserDerfault.set(sender.value, forKey: "sliderValue")
+        numberUserDerfault.set(numberValueSlider, forKey: "sliderValue")
         numberUserDerfault.synchronize()
     }
     
     // MARK: CREATE GIF
     
     @IBAction func audioGif(_ sender: Any) {
+        let imag = UIImage()
+        imag.animatedGif(from: arrimageVideo)
         checkCreateVideoAndGit = 1
-        // hidden Create Gif and Create Video
-        stackViewHidden.isHidden = true
-        stackTimeSpeedHidden.isHidden = true
-        btnReset.isHidden = false
-        constrainViewGifandVideo.constant = 0
-        constrainSpeed.constant = 0
-        constrainReset.constant = 45
-        constrainTopSpeed.constant = 0
-        constrainBottomSpeed.constant = 0
-         lblTut.isHidden = true
-
         // Create Gif
         let imageURL = UIImage.gifImageWithURL(urlGifString)
-        let imageView3 = UIImageView(image: imageURL)
+         imageView3 = UIImageView(image: imageURL)
         imageView3.frame = CGRect(x: 0, y: 0, width: viewPresent.frame.width, height: viewPresent.frame.height)
+
      //   imageView3.layer.cornerRadius = 17
        // imageView3.clipsToBounds = true
-        videogif.addSubview(imageView3)
+        viewPresent.addSubview(imageView3)
+        showCreareNewAndShareSave()
+        showAnimation()
+        hiddenSetTimeandCreateGifVideo()
     }
 
     @IBAction func ShareAudioGifandVideo(_ sender: Any) {
         if checkCreateVideoAndGit == 0 {
             let title = "Error"
-            let message = "Not File"
+            let message = "No files created"
             let view = MessageView.viewFromNib(layout: .cardView)
             view.configureTheme(.error)
             view.configureContent(title: title, body: message)
@@ -134,7 +182,6 @@ class GifAndCameraViewController: UIViewController {
             config.duration = .automatic
             SwiftMessages.show(config: config, view: view)
         } else if checkCreateVideoAndGit == 1  {
-            btnReset.isHidden = false
             // Share Gif
             let shareURL: URL = URL(string: urlGifString)!
             do {
@@ -143,11 +190,18 @@ class GifAndCameraViewController: UIViewController {
                 let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
                 self.present(activityViewController, animated: true, completion: nil)
             } catch {
-                print("error")
+                let title = "Error"
+                let message = "Please try again"
+                let view = MessageView.viewFromNib(layout: .cardView)
+                view.configureTheme(.error)
+                view.configureContent(title: title, body: message)
+                view.button?.isHidden = true
+                //Config
+                var config = SwiftMessages.Config()
+                config.duration = .automatic
+                SwiftMessages.show(config: config, view: view)
             }
         } else {
-            print("ajskljas")
-            btnReset.isHidden = false
             // Share Video
             let videoURL = URL(fileURLWithPath: urlString)
             let activityItems: [Any] = [videoURL]
@@ -162,7 +216,7 @@ class GifAndCameraViewController: UIViewController {
     @IBAction func saveCameraRoll(_ sender: Any) {
         if checkCreateVideoAndGit == 0 {
             let title = "Error"
-            let message = "Not File"
+            let message = "No files created"
             let view = MessageView.viewFromNib(layout: .cardView)
             view.configureTheme(.error)
             view.configureContent(title: title, body: message)
@@ -177,12 +231,23 @@ class GifAndCameraViewController: UIViewController {
                 let creationRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(string: urlGifString)! )
                 placeHolder = creationRequest?.placeholderForCreatedAsset
 
-            }, completionHandler: { (success, error) in 
+            }, completionHandler: { (success, error) in
                 if success {
                     let title = "Notification"
                     let message = "Your video was successfully saved"
                     let view = MessageView.viewFromNib(layout: .cardView)
                     view.configureTheme(.success)
+                    view.configureContent(title: title, body: message)
+                    view.button?.isHidden = true
+                    //Config
+                    var config = SwiftMessages.Config()
+                    config.duration = .automatic
+                    SwiftMessages.show(config: config, view: view)
+                } else {
+                    let title = "Error"
+                    let message = "Please try again"
+                    let view = MessageView.viewFromNib(layout: .cardView)
+                    view.configureTheme(.error)
                     view.configureContent(title: title, body: message)
                     view.button?.isHidden = true
                     //Config
@@ -240,8 +305,7 @@ class GifAndCameraViewController: UIViewController {
       // MARK: PLAY VIDEO
     //Edited By Manh Nguyen
     func playVideoWithUrl(strUrl : String) {
-        
-        lblTut.isHidden = true
+
          let playerItem = AVPlayerItem(url: URL.init(string: strUrl)!)
         if (videoPlayerVc == nil) {
            videoPlayerVc = AVPlayerViewController()
@@ -268,52 +332,38 @@ class GifAndCameraViewController: UIViewController {
             videoPlayerVc.player?.replaceCurrentItem(with: playerItem)
             
         }
-    //    videogif.isHidden = true
         videoPlayerVc.view.isHidden = false
         videoPlayerVc.player?.play()
         self.loadingView.stopAnimating()
     }
 
     @IBAction func audioVideo(_ sender: Any) {
+        showCreareNewAndShareSave()
         self.loadingView.type = .ballSpinFadeLoader
         self.loadingView.color = #colorLiteral(red: 0.2588235294, green: 0.07843137255, blue: 0.9411764706, alpha: 1)
         self.loadingView.startAnimating()
         checkCreateVideoAndGit = 2
-        // hidden Create Gif and Create Video
-        stackViewHidden.isHidden = true
-        stackTimeSpeedHidden.isHidden = true
-        btnReset.isHidden = false
-        constrainViewGifandVideo.constant = 0
-        constrainSpeed.constant = 0
-        constrainReset.constant = 45
-        constrainTopSpeed.constant = 0
-        constrainBottomSpeed.constant = 0
-
         //Play Video
         buildVideoFromImageArray()
+        //showCreareNewAndShareSave()
+        showAnimation()
+        hiddenSetTimeandCreateGifVideo()
     }
 
     @IBAction func resetGifAndVideo(_ sender: UIButton) {
-        checkCreateVideoAndGit = 0
-        // Show Create Gif and Create Video
-        stackViewHidden.isHidden = false
-        stackTimeSpeedHidden.isHidden = false
-        btnReset.isHidden = true
-        constrainViewGifandVideo.constant = 45
-        constrainSpeed.constant = 30
-        constrainReset.constant = 0
-        constrainTopSpeed.constant = 15
-        constrainBottomSpeed.constant = 15
-        lblTut.isHidden = false
-
         //Remove Video and Gif
-        removeFileAtURLIfExists(url: NSURL(fileURLWithPath: urlString))
-        videoPlayerVc?.player?.pause()
-        videoPlayerVc?.view.removeFromSuperview()
-        videoPlayerVc = nil
-    //    videogif.removeFromSuperview()
+        if checkCreateVideoAndGit == 1 {
+            imageView3.removeFromSuperview()
+        } else {
+           removeFileAtURLIfExists(url: NSURL(fileURLWithPath: urlString))
+            videoPlayerVc?.player?.pause()
+            videoPlayerVc.view.removeFromSuperview()
+            videoPlayerVc = nil
         }
-
+        showSetTimeandCreateGifVideo()
+        hiddenCreareNewAndShareSave()
+        checkCreateVideoAndGit = 0
+    }
 
     func buildVideoFromImageArray() {
         selectedPhotosArray = arrimageVideo
@@ -666,7 +716,7 @@ extension UIImage {
 
             let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
                                                             source: source)
-            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
+            delays.append(Int(timerVideoGif * 100) + 10) // Seconds to ms
         }
 
         let duration: Int = {
@@ -697,6 +747,14 @@ extension UIImage {
                                               duration: Double(duration) / 1000.0)
 
         return animation
+    }
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
 
