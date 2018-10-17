@@ -33,6 +33,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     fileprivate var isCanUpdateNumberOffset:Bool = false
     fileprivate var currentItemIdx: NSInteger = 0
 
+    @IBOutlet weak var removeAll: UIBarButtonItem!
+    @IBOutlet weak var removeIndex: UIBarButtonItem!
+
     @IBOutlet weak var scrollMenuBot: UIScrollView!
     @IBOutlet weak var txFShowText: UITextField!
     @IBOutlet weak var scrollViewNumber: UIScrollView!
@@ -217,6 +220,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         }
         self.guidleText(show: false)
         self.showFontSizeEdit(show: false)
+        removeAll.isEnabled = true
+        removeIndex.isEnabled = true
     }
     
     @objc func textInputChanged(textView : UITextView) {
@@ -245,14 +250,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     func addButton() {
         let number = arrNumbers.count
-        let originY = 5
-        var originX = 5
+        let originY = scrollViewNumber.frame.height / 2 - 38/2
+        var originX = 0
         
         for _ in 0..<number {
             originX +=  numberWidth + spaceSwidth
         }
         
-        let button:UIButton = UIButton(frame: CGRect(x: originX, y: originY, width: numberWidth, height: numberheigh))
+        let button:UIButton = UIButton(frame: CGRect(x: originX, y: Int(originY), width: numberWidth, height: numberheigh))
         button.backgroundColor = Constant.SELECTED_COLOR
         button.layer.cornerRadius = 5
         scrollViewNumber.addSubview(button)
@@ -263,6 +268,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         scrollViewMain.addGestureRecognizer(tapGest)
         
         button.setTitle("\(number + 1)", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         button.addTarget(self, action: #selector(clickItem), for: .touchUpInside)
         button.tag = arrNumbers.count - 1
     }
@@ -273,6 +279,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         
         let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
         currentItem.lblTut.isHidden = true
+        removeIndex.isEnabled = false
+        removeAll.isEnabled = false
+        
         
         //edited by Manh
         self.guidleText(show: true)
@@ -343,24 +352,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
        
     }
 
-    @IBAction func upLoadingGifVideo(_ sender: Any) {
-        let numberCountArrXib = arrXib.count
-        for i in 0..<numberCountArrXib {
-            guard let imageXib = image(with: arrXib[i]) else { return }
-            arrimageView.append(imageXib)
-        }
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "GifAndCameraViewController") as? GifAndCameraViewController  else { return }
-        let nav:UINavigationController = UINavigationController(rootViewController: vc)
-        
-        vc.arrimageVideo = arrimageView
-        navigationController?.present(nav, animated: true, completion: nil)
-    }
-
     func image(with view: UIView) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
         defer { UIGraphicsEndImageContext() }
         if let context = UIGraphicsGetCurrentContext() {
-            
+
             view.layer.render(in: context)
             let image = UIGraphicsGetImageFromCurrentImageContext()
             return image
@@ -368,8 +364,41 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         return nil
     }
 
-    @IBAction func removeGifVideo(_ sender: Any) {
+    @IBAction func createVideoGif(_ sender: Any) {
+        let numberCountArrXib = arrXib.count
+        for i in 0..<numberCountArrXib {
+            guard let imageXib = image(with: arrXib[i]) else { return }
+            arrimageView.append(imageXib)
+        }
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "GifAndCameraViewController") as? GifAndCameraViewController  else { return }
+        let nav:UINavigationController = UINavigationController(rootViewController: vc)
 
+        vc.arrimageVideo = arrimageView
+        navigationController?.present(nav, animated: true, completion: nil)
+    }
+
+    @IBAction func removeAll(_ sender: Any) {
+        for i in 0..<arrNumbers.count {
+            arrNumbers[i].removeFromSuperview()
+        }
+        for i in 0..<arrXib.count {
+            arrXib[i].removeFromSuperview()
+        }
+        arrNumbers.removeAll()
+        arrXib.removeAll()
+        currentItemIdx = 0
+        addButton()
+        addImagView()
+    }
+
+    @IBAction func removeGifVideo(_ sender: UIButton) {
+        arrXib[2].removeFromSuperview()
+       arrNumbers[2].removeFromSuperview()
+        arrNumbers.remove(at: 2)
+        arrXib.remove(at: 2)
+        scrollViewNumber.setNeedsDisplay()
+        scrollViewMain.setNeedsDisplay()
+        self.view.setNeedsDisplay()
     }
     
  // MARK: Click add more button
@@ -521,7 +550,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
                 lblSize.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 lblSize.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
                 self.layerElement(ele: lblSize.layer, borderColor: UIColor.red, cornerRadius: 7)
-                lblSize.text = "20"
+                lblSize.text = "35"
                 lblSize.font = UIFont.systemFont(ofSize: 19)
                 lblSize.textAlignment = NSTextAlignment.center
                 viewFontSizeEdit.addSubview(lblSize)
@@ -589,16 +618,32 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         ele.cornerRadius = cornerRadius
         ele.masksToBounds = true
     }
-    
+    var numberFontSize:CGFloat = 35
     @objc func plusFontSizeAction(sender: UIButton)  {
-        
+        numberFontSize += 1
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        }
     }
+
     @objc func minusFontSizeAction(sender: UIButton)  {
-        
+        numberFontSize -= 1
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        }
     }
     
     @objc func backToDefaultSet(sender: UIButton)  {
-        
+        numberFontSize = 35
+        if checkEmoj == 0 {
+            (scrollViewMain.subviews[temp1] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        } else {
+            (scrollViewMain.subviews[numberClickScroll] as? ItemScrollView)?.lblBackground.font = .systemFont(ofSize: numberFontSize)
+        }
     }
     // MARK:  SCROLLVIEW DELEGATE
     
@@ -608,7 +653,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
                 
             }
             numberIndext = Int(scrollViewMain.contentOffset.x) / Int(numberFrameXibWidth)
-            currentItemIdx = numberIndext
+          currentItemIdx = numberIndext
             //Edited by Manh Nguyen
             //update srollviewNumber
             let distanceX = scrollViewNumber.contentSize.width - scrollViewNumber.bounds.size.width

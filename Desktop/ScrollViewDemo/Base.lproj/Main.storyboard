@@ -78,6 +78,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="createVideoGif:" destination="98d-v7-u5m" eventType="touchUpInside" id="IBr-a7-GjY"/>
                                     <action selector="makeNowAction:" destination="98d-v7-u5m" eventType="touchUpInside" id="P5A-y4-N4T"/>
                                 </connections>
                             </button>
@@ -112,7 +113,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="action" id="nin-8O-1JZ">
                                 <connections>
-                                    <action selector="upLoadingGifVideo:" destination="98d-v7-u5m" id="dhz-ST-yG8"/>
+                                    <action selector="removeAll:" destination="98d-v7-u5m" id="dhz-ST-yG8"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="ONk-bm-kbP">
@@ -125,6 +126,8 @@
                     <connections>
                         <outlet property="btnAddMore" destination="ZDj-kt-1xr" id="Is8-xZ-9md"/>
                         <outlet property="btnMakeNow" destination="rFq-Oz-YaR" id="1ji-ow-Dd7"/>
+                        <outlet property="removeAll" destination="nin-8O-1JZ" id="wam-Os-uqy"/>
+                        <outlet property="removeIndex" destination="ONk-bm-kbP" id="1Dn-y4-AdV"/>
                         <outlet property="scrollMenuBot" destination="Z0U-hk-i2B" id="6CX-1Y-9N5"/>
                         <outlet property="scrollViewMain" destination="pze-b8-M1l" id="LIw-Mt-Meh"/>
                         <outlet property="scrollViewNumber" destination="Wwz-gE-vdh" id="dd7-s2-5bD"/>
@@ -270,13 +273,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.10000000000000001" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-Wa-QAg">
-                                        <rect key="frame" x="99.5" y="0.0" width="213" height="31"/>
+                                        <rect key="frame" x="76" y="0.0" width="229.5" height="31"/>
                                         <connections>
                                             <action selector="slideSpeed:" destination="mZV-3c-877" eventType="valueChanged" id="gwi-eL-Svr"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-hp-v2A">
-                                        <rect key="frame" x="320.5" y="0.0" width="17" height="30"/>
+                                        <rect key="frame" x="313.5" y="0.0" width="21" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
