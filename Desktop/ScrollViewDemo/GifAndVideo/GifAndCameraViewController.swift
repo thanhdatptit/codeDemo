@@ -118,6 +118,7 @@ class GifAndCameraViewController: UIViewController {
         imageView3.frame = CGRect(x: 0, y: 0, width: viewPresent.frame.width, height: viewPresent.frame.height)
      //   imageView3.layer.cornerRadius = 17
        // imageView3.clipsToBounds = true
+    
         videogif.addSubview(imageView3)
     }
 

@@ -54,9 +54,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         scrollMenuBot.delegate = self
         self.navigationController?.navigationBar.isOpaque = true
         self.navigationController?.navigationBar.isTranslucent = false
-        btnMakeNow.layer.cornerRadius = 10
-        
+        btnMakeNow.layer.cornerRadius = 15
+        btnMakeNow.layer.borderWidth = 5.0
+        btnMakeNow.layer.borderColor = UIColor.white.cgColor
+        scrollViewMain.layer.borderWidth = 5.0
+        scrollViewMain.layer.borderColor = UIColor.white.cgColor
         btnMakeNow.clipsToBounds = true
+        self.layerElement(ele: scrollViewMain.layer, borderColor: UIColor.red, cornerRadius: 15)
+//        self.layerElement(ele: btnAddMore.layer, borderColor: UIColor.red, cornerRadius: 15)
+//        btnAddMore.layer.borderWidth = 2.0
+//        btnAddMore.layer.borderColor = UIColor.white.cgColor
         addButton12()
         cusTomView()
         isShowEditedControl = false
@@ -115,12 +122,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
      //   self.viewMenuBottom.bringSubview(toFront: views[sender.selectedSegmentIndex])
     }
 
+    
+    
     func cusTomView() {
 
         //Edited By Manh Nguyen
         txFShowText.isHidden = true
         customKeyBoardAccessView = UIView(frame: CGRect(x: 0, y: 0, width: Constant.VIEW_ACCSESS_KEYB_SIZE.width, height: Constant.VIEW_ACCSESS_KEYB_SIZE.height))
-
+        //add clear button
+        let btnClear = UIButton(frame: CGRect(x: Constant.VIEW_ACCSESS_KEYB_SIZE.width - 30, y: Constant.VIEW_ACCSESS_KEYB_SIZE.height / 2 - 20, width: 40, height: 40))
+        btnClear.addTarget(self, action: #selector(clearTypingText), for: UIControlEvents.touchUpInside)
+        customKeyBoardAccessView.addSubview(btnClear)
+   
+        btnClear.setImage(UIImage.init(named: "clear"), for: UIControlState.normal)
         txfInput = UITextField(frame: CGRect(x: 5, y: Constant.VIEW_ACCSESS_KEYB_SIZE.height / 2 - Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height / 2, width: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.width, height: Constant.TEXTFILED_ACCSESS_KEYB_SIZE.height))
         txfInput.backgroundColor = UIColor.clear
         txfInput.addTarget(self, action: #selector(textInputChanged), for: UIControlEvents.editingChanged)
@@ -184,6 +198,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         self.view.addGestureRecognizer(tap)
     }
 
+    @objc func clearTypingText(sender:UIButton){
+        txfInput.text = ""
+        let currentItem: ItemScrollView = arrXib[currentItemIdx] as! ItemScrollView
+        currentItem.lblBackground.text = ""
+    }
+    
     // MARK: DISSMISS KEYBOARD
     @objc func dismissKeyboard(){
         view.endEditing(true)
@@ -340,6 +360,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
         defer { UIGraphicsEndImageContext() }
         if let context = UIGraphicsGetCurrentContext() {
+            
             view.layer.render(in: context)
             let image = UIGraphicsGetImageFromCurrentImageContext()
             return image
@@ -459,12 +480,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         guard let customView = Bundle.main.loadNibNamed("ItemScrollView", owner: self, options: nil)?.first as? ItemScrollView else { return }
         customView.frame = CGRect(x: originX, y: originY, width: numberFrameXibWidth, height: numberFrameXibheigh)
         customView.lblBackground.text = ""
-        customView.layer.cornerRadius = 20
-        customView.clipsToBounds = true
+//        customView.imagBackground.layer.cornerRadius = 20
+//        customView.imagBackground.clipsToBounds = true
+ 
+//        customView.backgroundColor = UIColor.white
+       
         scrollViewMain.contentSize.width = originX + numberFrameXibWidth
         scrollViewMain.isPagingEnabled = true
         print("X \(originX)")
-            customView.backgroundColor = UIColor.random()
+        customView.imagBackground.backgroundColor = UIColor.random()
         scrollViewMain.addSubview(customView)
         arrListConten.append(customView)
         print("abc \(arrXib.count)")
@@ -537,6 +561,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             else{
                 //do nothing
             }
+            
             UIView.animate(withDuration: 0.3) {
                 self.viewFontSizeEdit.frame = CGRect(x: Constant.MAIN_SCREEN_SIZE.width - Constant.VIEW_FONT_SIZE.width - 5, y: self.viewFontSizeEdit.frame.origin.y, width: Constant.VIEW_FONT_SIZE.width, height: self.viewFontSizeEdit.frame.size.height)
                 self.btnMakeNow.isEnabled = false
@@ -546,6 +571,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             isShowEditedControl = true
         }
         else{
+            if self.viewFontSizeEdit == nil {
+                return
+            }
             UIView.animate(withDuration: 0.3) {
                 self.viewFontSizeEdit.frame = CGRect(x: Constant.MAIN_SCREEN_SIZE.width, y: self.viewFontSizeEdit.frame.origin.y, width: Constant.VIEW_FONT_SIZE.width, height: self.viewFontSizeEdit.frame.size.height)
                 self.btnMakeNow.isEnabled = true

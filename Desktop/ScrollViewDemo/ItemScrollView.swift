@@ -21,7 +21,7 @@ class ItemScrollView: UIView {
     var oldY: CGFloat = 0
     override func layoutSubviews() {
         let panGest : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveAround))
-        lblBackground.isUserInteractionEnabled = true
+        lblBackground.isUserInteractionEnabled = false
         lblBackground.addGestureRecognizer(panGest)
         print("lbl : \(lblBackground)")
     }

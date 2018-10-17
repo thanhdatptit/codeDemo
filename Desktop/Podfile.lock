@@ -13,7 +13,7 @@ DEPENDENCIES:
   - SwiftMessages (~> 5.0.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - DGActivityIndicatorView
     - NVActivityIndicatorView
     - SwiftMessages
@@ -25,4 +25,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 453f006e1782083862cf067ea8c2cb1e94d423ef
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.5.0

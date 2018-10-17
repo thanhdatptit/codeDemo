@@ -22,14 +22,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-gE-vdh">
-                                <rect key="frame" x="5" y="82" width="322" height="48"/>
+                                <rect key="frame" x="5" y="82" width="320" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="bxg-vF-LAE"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDj-kt-1xr">
                                 <rect key="frame" x="327" y="82" width="48" height="48"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.89411764709999997" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.25505796505635187" green="0.89839784263959388" blue="0.060736852586468493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZDj-kt-1xr" secondAttribute="height" multiplier="1:1" id="zo8-GU-LOr"/>
                                 </constraints>
@@ -68,14 +68,13 @@
                                     <constraint firstAttribute="height" constant="40" id="0f1-N0-VKx"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFq-Oz-YaR">
-                                <rect key="frame" x="112.5" y="358" width="150" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFq-Oz-YaR">
+                                <rect key="frame" x="137.5" y="358" width="100" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="rFq-Oz-YaR" secondAttribute="height" multiplier="15:4" id="pkH-BZ-8Je"/>
+                                    <constraint firstAttribute="width" secondItem="rFq-Oz-YaR" secondAttribute="height" multiplier="15:4" constant="-50" id="pkH-BZ-8Je"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <state key="normal" title="Make Now">
+                                <state key="normal" image="go3">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -96,13 +95,13 @@
                             <constraint firstItem="Wwz-gE-vdh" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" constant="5" id="Mp1-wG-td4"/>
                             <constraint firstItem="rFq-Oz-YaR" firstAttribute="top" secondItem="pze-b8-M1l" secondAttribute="bottom" constant="6" id="Psf-Rv-5Fh"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="Z0U-hk-i2B" secondAttribute="trailing" id="SSC-SE-yVq"/>
+                            <constraint firstItem="rFq-Oz-YaR" firstAttribute="centerX" secondItem="ggq-XS-eWy" secondAttribute="centerX" id="TI5-cA-O8W"/>
                             <constraint firstItem="pze-b8-M1l" firstAttribute="top" secondItem="Wwz-gE-vdh" secondAttribute="bottom" constant="8" id="b4d-2J-yX1"/>
-                            <constraint firstItem="rFq-Oz-YaR" firstAttribute="width" secondItem="ggq-XS-eWy" secondAttribute="width" multiplier="0.4" id="bhe-ee-3gg"/>
+                            <constraint firstItem="rFq-Oz-YaR" firstAttribute="width" secondItem="ggq-XS-eWy" secondAttribute="width" multiplier="0.4" constant="-50" id="bhe-ee-3gg"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="bottom" secondItem="3U3-0W-FKC" secondAttribute="bottom" id="cr0-Aa-962"/>
                             <constraint firstItem="40f-Zh-K3F" firstAttribute="trailing" secondItem="ZDj-kt-1xr" secondAttribute="trailing" id="dWA-O9-29B"/>
-                            <constraint firstItem="ZDj-kt-1xr" firstAttribute="leading" secondItem="Wwz-gE-vdh" secondAttribute="trailing" id="hnW-Zk-OfU"/>
+                            <constraint firstItem="ZDj-kt-1xr" firstAttribute="leading" secondItem="Wwz-gE-vdh" secondAttribute="trailing" constant="2" id="hnW-Zk-OfU"/>
                             <constraint firstItem="Gip-RR-Jrr" firstAttribute="leading" secondItem="40f-Zh-K3F" secondAttribute="leading" constant="20" id="icU-EB-tQp"/>
-                            <constraint firstItem="rFq-Oz-YaR" firstAttribute="centerX" secondItem="ggq-XS-eWy" secondAttribute="centerX" id="ihY-Bc-nJY"/>
                             <constraint firstItem="Z0U-hk-i2B" firstAttribute="top" secondItem="Gip-RR-Jrr" secondAttribute="bottom" constant="4" id="sfo-4V-chb"/>
                             <constraint firstItem="pze-b8-M1l" firstAttribute="centerX" secondItem="ggq-XS-eWy" secondAttribute="centerX" id="xOC-5M-b0j"/>
                             <constraint firstItem="Wwz-gE-vdh" firstAttribute="top" secondItem="40f-Zh-K3F" secondAttribute="top" constant="18" id="xvc-wA-sq8"/>
@@ -315,13 +314,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.10000000000000001" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-Wa-QAg">
-                                        <rect key="frame" x="99.5" y="0.0" width="209" height="31"/>
+                                        <rect key="frame" x="99.5" y="0.0" width="213" height="31"/>
                                         <connections>
                                             <action selector="slideSpeed:" destination="mZV-3c-877" eventType="valueChanged" id="gwi-eL-Svr"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-hp-v2A">
-                                        <rect key="frame" x="316.5" y="0.0" width="21" height="30"/>
+                                        <rect key="frame" x="320.5" y="0.0" width="17" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -492,4 +491,7 @@
             <point key="canvasLocation" x="224.80000000000001" y="31.934032983508249"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="go3" width="32" height="32"/>
+    </resources>
 </document>
