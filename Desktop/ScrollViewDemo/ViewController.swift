@@ -354,7 +354,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             }
             
         }
-       
+
     }
 
     func image(with view: UIView) -> UIImage? {
@@ -400,13 +400,26 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
 
     @IBAction func removeGifVideo(_ sender: UIButton) {
-//        arrXib[2].removeFromSuperview()
-//       arrNumbers[2].removeFromSuperview()
-//        arrNumbers.remove(at: 2)
-//        arrXib.remove(at: 2)
-//        scrollViewNumber.setNeedsDisplay()
-//        scrollViewMain.setNeedsDisplay()
-//        self.view.setNeedsDisplay()
+        let originY = scrollViewNumber.frame.height / 2 - 38/2
+        var originX = 0
+
+        for i in scrollViewNumber.subviews {
+           if i.tag == 0 {
+                i.removeFromSuperview()
+           } else {
+            i.frame = CGRect(x: originX, y: Int(originY), width: 38, height: 38)
+            originX += 10 + 38
+            }
+        }
+
+//        for i in scrollViewMain.subviews {
+//            if i.tag == 0 {
+//                i.removeFromSuperview()
+//            } else {
+//                i.frame = CGRect(x: originX12, y: originY12, width: scrollViewMain.frame.width, height: scrollViewMain.frame.height)
+//                originX12 += scrollViewMain.frame.width
+//            }
+//        }
         let title = "Notification"
         let message = "Đang làm chưa xong"
         let view = MessageView.viewFromNib(layout: .cardView)

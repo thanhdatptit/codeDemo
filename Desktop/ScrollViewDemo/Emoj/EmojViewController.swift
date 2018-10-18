@@ -41,12 +41,14 @@ class EmojViewController: UIViewController {
         ]
 
         for range in emojiRanges {
-            var array: [String] = ["👻","❤️","🤩","💔"]
+            var arrayEmoj:[String] = ["🤩"]
+            let array: [String] = ["💩","👻","❤️","💔", "💗","☠️", "🐶", "🐹", "🐥", "🐷","🙈","🙊", "🙉","😹","😻", "🦁", "🤷🏼‍♂️", "🤷‍♀️", "🌴", "☘️", "🎍", "🎋", "🍄", "🐲", "🌵","🎄","✨", "🌟", "⚡️", "🌤","⛈", "☃️", "☔️", "👨🏻‍💻", "👩‍💻", "👐","👏","🤝","👍","👎","👊","✌️","👆","👇"]
             for i in range {
                 if let unicodeScalar = UnicodeScalar(i){
-                    array.append(String(describing: unicodeScalar))
+                    arrayEmoj.append(String(describing: unicodeScalar))
                 }
             }
+            emojiList.append(arrayEmoj)
             emojiList.append(array)
         }
     }
@@ -73,11 +75,19 @@ extension EmojViewController: UICollectionViewDataSource {
 
 }
 
-extension EmojViewController: UICollectionViewDelegate {
+extension EmojViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let emoji = emojiList[indexPath.section][indexPath.item]
         print(emoji)
         delegate?.emojView(self, didSelect: emoji)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }
 
