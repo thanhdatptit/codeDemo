@@ -14,6 +14,7 @@
 		2501AEF6216997CB007A6018 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2501AEF4216997CB007A6018 /* LaunchScreen.storyboard */; };
 		2501AF01216997CB007A6018 /* ScrollViewDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501AF00216997CB007A6018 /* ScrollViewDemoTests.swift */; };
 		2501AF0C216997CB007A6018 /* ScrollViewDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501AF0B216997CB007A6018 /* ScrollViewDemoUITests.swift */; };
+		25B1E731217DC2AA00A494C1 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B1E730217DC2A900A494C1 /* UILabel.swift */; };
 		25DCFB252169E96B0009F361 /* ItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DCFB242169E96B0009F361 /* ItemScrollView.swift */; };
 		25DCFB272169ED0C0009F361 /* ItemScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DCFB262169ED0C0009F361 /* ItemScrollView.xib */; };
 		25FB0EBE216DA7C400C5ADD9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB0EBD216DA7C400C5ADD9 /* Constant.swift */; };
@@ -71,6 +72,7 @@
 		2501AF07216997CB007A6018 /* ScrollViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrollViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2501AF0B216997CB007A6018 /* ScrollViewDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDemoUITests.swift; sourceTree = "<group>"; };
 		2501AF0D216997CB007A6018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25B1E730217DC2A900A494C1 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		25DCFB242169E96B0009F361 /* ItemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemScrollView.swift; sourceTree = "<group>"; };
 		25DCFB262169ED0C0009F361 /* ItemScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemScrollView.xib; sourceTree = "<group>"; };
 		25FB0EBD216DA7C400C5ADD9 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		25FB0EBC216DA77F00C5ADD9 /* Custome */ = {
 			isa = PBXGroup;
 			children = (
+				25B1E730217DC2A900A494C1 /* UILabel.swift */,
 				25FB0EBD216DA7C400C5ADD9 /* Constant.swift */,
 			);
 			path = Custome;
@@ -468,6 +471,7 @@
 				2F5910D4216B7C00008B7B85 /* ColorBackgroungViewController.swift in Sources */,
 				25DCFB252169E96B0009F361 /* ItemScrollView.swift in Sources */,
 				2F608EFF2170F19C00C48961 /* HomeViewController.swift in Sources */,
+				25B1E731217DC2AA00A494C1 /* UILabel.swift in Sources */,
 				2F5910E4216B84F1008B7B85 /* CellEmojCollectionViewCell.swift in Sources */,
 				2F5910C7216B7B6F008B7B85 /* EmojViewController.swift in Sources */,
 				2501AEEE216997CA007A6018 /* ViewController.swift in Sources */,

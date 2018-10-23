@@ -23,6 +23,7 @@ class TextImageViewController: UIViewController {
         super.viewDidLoad()
         tbVTextItem.delegate = self
         tbVTextItem.dataSource = self
+        tbVTextItem.reloadData()
     }
 }
 
@@ -30,7 +31,10 @@ extension TextImageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gradePickerValues.count
     }
-
+    func numberOfSections(in tableView: UITableView) -> Int {
+     return 1
+    }
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = Bundle.main.loadNibNamed("CellTextItemTableViewCell", owner: self, options: nil)?.first as? CellTextItemTableViewCell else { return UITableViewCell() }
         cell.lblShowNameText.font = UIFont(name: gradePickerValues[indexPath.row], size: 25)
@@ -45,6 +49,8 @@ extension TextImageViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell :UITableViewCell = tableView.cellForRow(at: indexPath)!
+//        cell.accessoryType = UITableViewCellAccessoryType.checkmark
         let frontText = gradePickerValues[indexPath.row]
         print(frontText)
         delegate?.textImageView(self, didSelectfont: frontText)

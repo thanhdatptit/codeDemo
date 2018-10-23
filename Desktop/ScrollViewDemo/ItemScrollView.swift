@@ -20,10 +20,15 @@ class ItemScrollView: UIView {
     var oldX: CGFloat = 0
     var oldY: CGFloat = 0
     override func layoutSubviews() {
-        let panGest : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveAround))
-        lblBackground.isUserInteractionEnabled = false
-        lblBackground.addGestureRecognizer(panGest)
-        print("lbl : \(lblBackground)")
+        
+        if lblBackground == nil {
+            return
+        }
+//        lblBackground.frame = CGRect(x: self.frame.size.width / 2 - (self.frame.size.width  - 10) / 2 - 5, y: self.frame.size.height / 2 - 50 / 2, width: self.frame.size.width - 10, height: 50)
+//        let panGest : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveAround))
+//        lblBackground.isUserInteractionEnabled = true
+//        lblBackground.addGestureRecognizer(panGest)
+//        print("lbl : \(lblBackground)")
     }
     
     @objc func moveAround(panGes : UIPanGestureRecognizer)  {
