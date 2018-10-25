@@ -183,33 +183,14 @@ class GifAndCameraViewController: UIViewController {
             SwiftMessages.show(config: config, view: view)
         } else if checkCreateVideoAndGit == 1  {
             // Share Gif
-            let shareURL: URL = URL(string: urlGifString)!
-            do {
-                let  shareData: NSData = try NSData(contentsOf: shareURL)
-                let firstActivityItem: Array = [shareData]
-                let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: firstActivityItem, applicationActivities: nil)
-                self.present(activityViewController, animated: true, completion: nil)
-            } catch {
-                let title = "Error"
-                let message = "Please try again"
-                let view = MessageView.viewFromNib(layout: .cardView)
-                view.configureTheme(.error)
-                view.configureContent(title: title, body: message)
-                view.button?.isHidden = true
-                //Config
-                var config = SwiftMessages.Config()
-                config.duration = .automatic
-                SwiftMessages.show(config: config, view: view)
-            }
+            let items = [URL(string: urlGifString)!]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
         } else {
             // Share Video
-            let videoURL = URL(fileURLWithPath: urlString)
-            let activityItems: [Any] = [videoURL]
-            let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-            activityController.popoverPresentationController?.sourceView = view
-            activityController.popoverPresentationController?.sourceRect = view.frame
-
-            self.present(activityController, animated: true, completion: nil)
+            let items = [URL(string: urlString)!]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
         }
     }
 
@@ -572,7 +553,7 @@ class GifAndCameraViewController: UIViewController {
 extension UIImage {
     func animatedGif(from images: [UIImage]) {
         let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]  as CFDictionary
-        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 1.0]] as CFDictionary
+        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): timerVideoGif]] as CFDictionary
 
         let documentsDirectoryURL: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let fileURL: URL? = documentsDirectoryURL?.appendingPathComponent("animated.gif")
@@ -716,7 +697,8 @@ extension UIImage {
 
             let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
                                                             source: source)
-            delays.append(Int(timerVideoGif * 100) + 10) // Seconds to ms
+            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
+           // timerVideoGif
         }
 
         let duration: Int = {
